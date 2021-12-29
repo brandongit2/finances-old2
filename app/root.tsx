@@ -2,6 +2,16 @@ import {Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration} from "remix
 
 import type {MetaFunction} from "remix"
 
+import globalStyles from "./global.css"
+import tailwindStyles from "./tailwind.css"
+
+export function links() {
+  return [
+    {rel: `stylesheet`, href: globalStyles},
+    {rel: `stylesheet`, href: tailwindStyles},
+  ]
+}
+
 export const meta: MetaFunction = () => {
   return {title: `Finances`}
 }
