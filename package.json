@@ -21,6 +21,7 @@
     "lint": "prettier --write . --loglevel warn && eslint --fix . && tsc"
   },
   "dependencies": {
+    "@prisma/client": "3.7.0",
     "@remix-run/react": "1.1.1",
     "@remix-run/serve": "1.1.1",
     "react": "17.0.2",
@@ -39,6 +40,8 @@
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
     "prettier": "2.5.1",
+    "prettier-plugin-prisma": "3.7.0",
+    "prisma": "3.7.0",
     "typescript": "4.5.4"
   },
   "packageManager": "yarn@3.1.1"

@@ -130,6 +130,41 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prisma/client@npm:3.7.0":
+  version: 3.7.0
+  resolution: "@prisma/client@npm:3.7.0"
+  dependencies:
+    "@prisma/engines-version": 3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f
+  peerDependencies:
+    prisma: "*"
+  peerDependenciesMeta:
+    prisma:
+      optional: true
+  checksum: 655adc8dfbd0161d5550938997265faee1f2fe46cc018e8ec6bd006a6b9bef2c25dab1af322e6423d9d2e566fdc99f93e83dad687673ff346b77582f7e9e7e9d
+  languageName: node
+  linkType: hard
+
+"@prisma/engines-version@npm:3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f":
+  version: 3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f
+  resolution: "@prisma/engines-version@npm:3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f"
+  checksum: b6e37f964bdb4244584b534100302651d70af920e1ffd5fa51bbc6bfb2076229c071fd6b45d8cba1752acd05337bd9e4fddb9456060d55985d51829f1c7e6c7d
+  languageName: node
+  linkType: hard
+
+"@prisma/engines@npm:3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f":
+  version: 3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f
+  resolution: "@prisma/engines@npm:3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f"
+  checksum: 82ef728857ae2e978d159d57b0135f419b02a6c69b9d6d08630619d0e0018314c8c5ee5608f8a6fe4b911656b7a1c5795698cb856a16c27039642f12cd2a7163
+  languageName: node
+  linkType: hard
+
+"@prisma/prisma-fmt-wasm@npm:3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f":
+  version: 3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f
+  resolution: "@prisma/prisma-fmt-wasm@npm:3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f"
+  checksum: 252cd845714e53d530ef1b383a697486c10a74dc2086095d70c0910874f53a9d7a58bd9b89a2a374480e171ca3bd2c4db85d422a8a7345721236aca409ef7990
+  languageName: node
+  linkType: hard
+
 "@remix-run/dev@npm:1.1.1":
   version: 1.1.1
   resolution: "@remix-run/dev@npm:1.1.1"
@@ -2236,6 +2271,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "finances@workspace:."
   dependencies:
+    "@prisma/client": 3.7.0
     "@remix-run/dev": 1.1.1
     "@remix-run/react": 1.1.1
     "@remix-run/serve": 1.1.1
@@ -2249,6 +2285,8 @@ __metadata:
     eslint-plugin-react: 7.28.0
     eslint-plugin-react-hooks: 4.3.0
     prettier: 2.5.1
+    prettier-plugin-prisma: 3.7.0
+    prisma: 3.7.0
     react: 17.0.2
     react-dom: 17.0.2
     remix: 1.1.1
@@ -4491,6 +4529,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prettier-plugin-prisma@npm:3.7.0":
+  version: 3.7.0
+  resolution: "prettier-plugin-prisma@npm:3.7.0"
+  dependencies:
+    "@prisma/prisma-fmt-wasm": 3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f
+  peerDependencies:
+    prettier: ">=2"
+  checksum: 636ca636ac70cb419f8925cd3bf622cf0b7a85070112887b1b1f888d1f4493638c51f5af9b9e1b5af5d8ab88758d1f00e64a3a3b14ee5d45c910e59fd763738a
+  languageName: node
+  linkType: hard
+
 "prettier@npm:2.5.1":
   version: 2.5.1
   resolution: "prettier@npm:2.5.1"
@@ -4506,6 +4555,18 @@ __metadata:
   dependencies:
     parse-ms: ^2.1.0
   checksum: d76c4920283b48be91f1d3797a2ce4bd51187d58d2a609ae993c028f73c92d16439449d857af57ccad91ae3a38b30c87307f5589749a056102ebb494c686957e
+  languageName: node
+  linkType: hard
+
+"prisma@npm:3.7.0":
+  version: 3.7.0
+  resolution: "prisma@npm:3.7.0"
+  dependencies:
+    "@prisma/engines": 3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f
+  bin:
+    prisma: build/index.js
+    prisma2: build/index.js
+  checksum: fd68e98f5012ff6a454c39510e230bea517e8c69a639463595d07aa4e0c8e0c1670c4e01374de888feb8f2d18e57afc6142d6b7348540def85fe1ee892690fe3
   languageName: node
   linkType: hard
 
