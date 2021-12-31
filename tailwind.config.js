@@ -1,3 +1,5 @@
+const plugin = require(`tailwindcss/plugin`)
+
 /** @type {import('tailwindcss/tailwind-config').TailwindConfig} */
 module.exports = {
   content: [`./app/**/*.tsx`],
@@ -16,6 +18,34 @@ module.exports = {
         10: `var(--olive10)`,
         11: `var(--olive11)`,
         12: `var(--olive12)`,
+        light: {
+          1: `var(--oliveLight1)`,
+          2: `var(--oliveLight2)`,
+          3: `var(--oliveLight3)`,
+          4: `var(--oliveLight4)`,
+          5: `var(--oliveLight5)`,
+          6: `var(--oliveLight6)`,
+          7: `var(--oliveLight7)`,
+          8: `var(--oliveLight8)`,
+          9: `var(--oliveLight9)`,
+          10: `var(--oliveLight10)`,
+          11: `var(--oliveLight11)`,
+          12: `var(--oliveLight12)`,
+        },
+        dark: {
+          1: `var(--oliveDark1)`,
+          2: `var(--oliveDark2)`,
+          3: `var(--oliveDark3)`,
+          4: `var(--oliveDark4)`,
+          5: `var(--oliveDark5)`,
+          6: `var(--oliveDark6)`,
+          7: `var(--oliveDark7)`,
+          8: `var(--oliveDark8)`,
+          9: `var(--oliveDark9)`,
+          10: `var(--oliveDark10)`,
+          11: `var(--oliveDark11)`,
+          12: `var(--oliveDark12)`,
+        },
       },
       grass: {
         1: `var(--grass1)`,
@@ -30,10 +60,51 @@ module.exports = {
         10: `var(--grass10)`,
         11: `var(--grass11)`,
         12: `var(--grass12)`,
+        light: {
+          1: `var(--grassLight1)`,
+          2: `var(--grassLight2)`,
+          3: `var(--grassLight3)`,
+          4: `var(--grassLight4)`,
+          5: `var(--grassLight5)`,
+          6: `var(--grassLight6)`,
+          7: `var(--grassLight7)`,
+          8: `var(--grassLight8)`,
+          9: `var(--grassLight9)`,
+          10: `var(--grassLight10)`,
+          11: `var(--grassLight11)`,
+          12: `var(--grassLight12)`,
+        },
+        dark: {
+          1: `var(--grassDark1)`,
+          2: `var(--grassDark2)`,
+          3: `var(--grassDark3)`,
+          4: `var(--grassDark4)`,
+          5: `var(--grassDark5)`,
+          6: `var(--grassDark6)`,
+          7: `var(--grassDark7)`,
+          8: `var(--grassDark8)`,
+          9: `var(--grassDark9)`,
+          10: `var(--grassDark10)`,
+          11: `var(--grassDark11)`,
+          12: `var(--grassDark12)`,
+        },
       },
+      error: `var(--error)`,
     },
     fontFamily: {
       sans: [`Public Sans`, `sans-serif`],
     },
   },
+  plugins: [
+    plugin(({addUtilities}) => {
+      addUtilities({
+        ".hard-center": {
+          position: `absolute`,
+          left: `50%`,
+          top: `50%`,
+          transform: `translate(-50%, -50%)`,
+        },
+      })
+    }),
+  ],
 }

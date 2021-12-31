@@ -2,11 +2,13 @@ import {Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration} from "remix
 
 import type {MetaFunction} from "remix"
 
+import colorStyles from "./colors.css"
 import globalStyles from "./global.css"
 import tailwindStyles from "./tailwind.css"
 
 export function links() {
   return [
+    {rel: `stylesheet`, href: colorStyles},
     {rel: `stylesheet`, href: globalStyles},
     {rel: `stylesheet`, href: tailwindStyles},
   ]
