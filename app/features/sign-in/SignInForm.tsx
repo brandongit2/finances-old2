@@ -1,4 +1,4 @@
-import {Form, useActionData} from "remix"
+import {Form} from "remix"
 import * as yup from "yup"
 
 import type {FC} from "react"
@@ -11,8 +11,8 @@ import Label from "~/components/atoms/Label"
 import TextInput from "~/components/atoms/TextInput"
 import FormError from "~/components/FormError"
 import type {YupShape} from "~/types/YupShape"
-import type {ValidationErrorObj} from "~/util/validation"
-import {email, password} from "~/util/validation"
+import {useValidation} from "~/util/useValidation"
+import {email} from "~/util/validation"
 
 export type TSignIn = {
   email: string
@@ -21,11 +21,13 @@ export type TSignIn = {
 
 export const signInSchema = yup.object().shape<YupShape<TSignIn>>({
   email: email.required(),
-  password: password.required(),
+
+  // Don't use the `password` const from ~/util/validation because we're not creating any passwords here.
+  password: yup.string().max(500).required(),
 })
 
 const SignInForm: FC = () => {
-  const errors = useActionData<ValidationErrorObj<TSignIn>>()
+  const {validate, errors} = useValidation<TSignIn>(signInSchema)
 
   return (
     <Card className="flex flex-col gap-4 max-w-md">
@@ -39,16 +41,20 @@ const SignInForm: FC = () => {
 
       <Hr />
 
-      <Form method="post" replace className="grid grid-cols-[auto_1fr] items-center gap-4" noValidate>
-        <FormError className="col-span-2">{errors?.root}</FormError>
+      <Form method="post" replace className="grid grid-cols-[auto_1fr] items-center gap-x-4" noValidate>
+        <FormError messages={errors.root} className="col-span-2" marginBottom />
 
         <Label className="text-right">Email</Label>
-        <TextInput type="email" name="email" />
-        <FormError className="col-start-2 -mt-3.5">{errors?.email}</FormError>
+        <TextInput type="email" name="email" {...validate(`email`)} />
+        <FormError messages={errors.email} className="col-start-2" />
+
+        <div className="h-4 col-span-2" />
 
         <Label className="text-right">Password</Label>
-        <TextInput type="password" name="password" />
-        <FormError className="col-start-2 -mt-3.5">{errors?.password}</FormError>
+        <TextInput type="password" name="password" {...validate(`password`)} />
+        <FormError className="col-start-2">{errors.password}</FormError>
+
+        <div className="h-4 col-span-2" />
 
         <Button type="submit" filled className="col-start-2 mx-auto">
           Submit

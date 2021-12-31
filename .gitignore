@@ -23,3 +23,5 @@ yarn-error.log*
 **/supabase/.branches
 **/supabase/.temp
 **/supabase/.env
+
+app/tailwind.css

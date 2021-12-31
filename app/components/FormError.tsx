@@ -2,13 +2,25 @@ import clsx from "clsx"
 
 import type {FC} from "react"
 
-const FormError: FC<JSX.IntrinsicElements[`p`]> = ({className, children, ...props}) => {
-  if (!children) return null
+type FormErrorProps = {
+  messages?: string[]
+  marginBottom?: boolean
+}
 
+const FormError: FC<FormErrorProps & JSX.IntrinsicElements[`div`]> = ({
+  messages,
+  marginBottom = false,
+  className,
+  ...props
+}) => {
   return (
-    <p {...props} className={clsx(`text-error text-sm`, className)}>
-      {children}
-    </p>
+    <div {...props} className={clsx(messages?.length && marginBottom && `pb-4`, className)}>
+      {messages?.map((message) => (
+        <p key={message} className="text-error text-sm">
+          {message}
+        </p>
+      ))}
+    </div>
   )
 }
 

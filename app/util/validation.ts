@@ -54,7 +54,7 @@ export async function validate<T>(request: Request, schema: yup.ObjectSchema<Yup
       // `foo.bar` -> {foo: {bar: `[error msg]`}}
       errors.forEach((error) => {
         const path = error.path?.split(`.`)
-        let pathEntries: ValidationErrorObj<any> | string = error.message
+        let pathEntries: ValidationErrorObj<any> | string[] = error.errors
 
         if (!path) {
           pathEntries = {root: pathEntries}
@@ -68,7 +68,7 @@ export async function validate<T>(request: Request, schema: yup.ObjectSchema<Yup
 
         // Combine the paths of all the errors into one object representing all the errors that occured in the form
         // submission
-        errorObj = {...errorObj, ...(pathEntries as Exclude<ValidationErrorObj<T>, string>)}
+        errorObj = {...errorObj, ...(pathEntries as ValidationErrorObj<T>)}
       })
 
       throw new ValidationError(errorObj)
@@ -79,10 +79,8 @@ export async function validate<T>(request: Request, schema: yup.ObjectSchema<Yup
 }
 
 export type ValidationErrorObj<Obj> = {
-  [Name in keyof Obj]: Obj[Name] extends yup.AnyObjectSchema
-    ? {[name: string]: ValidationErrorObj<Obj[Name]> | string}
-    : Obj[Name]
-} & {root?: string}
+  [Name in keyof Obj]?: Obj[Name] extends {[key: string]: any} ? ValidationErrorObj<Obj[Name]> : string[]
+} & {root?: string[]}
 
 // The way this error class is being used in the `validate` function, validation errors that happen at the root level
 // will have their messages placed in a property called "root". This means that forms using this class must not have any

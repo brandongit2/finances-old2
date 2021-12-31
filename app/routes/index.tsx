@@ -1,3 +1,4 @@
+import {PrismaClient} from "@prisma/client"
 import {redirect} from "remix"
 
 import type {FC} from "react"
@@ -8,12 +9,19 @@ import Card from "~/components/atoms/Card"
 import Hr from "~/components/atoms/Hr"
 import type {TSignIn} from "~/features/sign-in/SignInForm"
 import SignInForm, {signInSchema} from "~/features/sign-in/SignInForm"
+import {compare} from "~/util/bcrypt.server"
 import type {ValidationErrorObj} from "~/util/validation"
 import {validate, ValidationError} from "~/util/validation"
 
 export const action: ActionFunction = async ({request}): Promise<ValidationErrorObj<any> | Response> => {
   try {
-    await validate<TSignIn>(request, signInSchema)
+    const credentials = await validate<TSignIn>(request, signInSchema)
+
+    const client = new PrismaClient()
+    const user = await client.user.findUnique({where: {email: credentials.email}})
+    if (!user || !compare(credentials.password, user.passwordHash))
+      return {root: [`Invalid email-password combination.`]}
+
     return redirect(`/dashboard`)
   } catch (err) {
     if (!(err instanceof ValidationError)) throw err
