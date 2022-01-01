@@ -30,3 +30,7 @@ label {
 input {
   background: transparent;
 }
+
+button {
+  text-align: start;
+}

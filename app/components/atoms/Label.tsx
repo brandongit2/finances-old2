@@ -2,9 +2,13 @@ import clsx from "clsx"
 
 import type {FC} from "react"
 
-const Label: FC<JSX.IntrinsicElements[`label`]> = ({children, className, ...props}) => {
+type LabelProps = {
+  subdued?: boolean
+}
+
+const Label: FC<LabelProps & JSX.IntrinsicElements[`label`]> = ({subdued = false, children, className, ...props}) => {
   return (
-    <label {...props} className={clsx(`font-semibold text-sm`, className)}>
+    <label {...props} className={clsx(`font-semibold`, subdued ? `text-xs text-olive-11` : `text-sm`, className)}>
       {children}
     </label>
   )

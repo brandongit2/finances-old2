@@ -8,14 +8,22 @@ datasource db {
 }
 
 model User {
-  id           String @id @default(cuid())
+  id           String   @id @default(cuid())
   firstName    String
   lastName     String
-  email        String @unique
+  email        String   @unique
   passwordHash String
+  createdAt    DateTime @default(now())
 }
 
 model SessionData {
   id   String @id @default(cuid())
   data String
+}
+
+model Transaction {
+  id        String   @id @default(cuid())
+  amount    Int
+  name      String
+  createdAt DateTime @default(now())
 }

@@ -12,6 +12,19 @@
   --grassLight11: #297c3b;
   --grassLight12: #1b311e;
 
+  --grassLightA1: #05c00504;
+  --grassLightA2: #05c0050c;
+  --grassLightA3: #02b30214;
+  --grassLightA4: #01a00120;
+  --grassLightA5: #01970631;
+  --grassLightA6: #018e0c48;
+  --grassLightA7: #008a0c68;
+  --grassLightA8: #008d1a9a;
+  --grassLightA9: #008619b9;
+  --grassLightA10: #007a19c2;
+  --grassLightA11: #006316d6;
+  --grassLightA12: #001904e4;
+
   --grassDark1: #0d1912;
   --grassDark2: #0f1e13;
   --grassDark3: #132819;
@@ -24,6 +37,19 @@
   --grassDark10: #55b467;
   --grassDark11: #63c174;
   --grassDark12: #e5fbeb;
+
+  --grassDarkA1: #00000000;
+  --grassDarkA2: #68fc3f06;
+  --grassDarkA3: #68fc7b11;
+  --grassDarkA4: #67ff801a;
+  --grassDarkA5: #63fe7d24;
+  --grassDarkA6: #63ff8230;
+  --grassDarkA7: #65ff8443;
+  --grassDarkA8: #69ff825e;
+  --grassDarkA9: #69ff829e;
+  --grassDarkA10: #78ff91ac;
+  --grassDarkA11: #83ff97ba;
+  --grassDarkA12: #eafff0fa;
 
   --oliveLight1: #fcfdfc;
   --oliveLight2: #f8faf8;
@@ -59,19 +85,6 @@
   :root,
   .theme-regular,
   .theme-regular * {
-    --olive1: var(--oliveLight1);
-    --olive2: var(--oliveLight2);
-    --olive3: var(--oliveLight3);
-    --olive4: var(--oliveLight4);
-    --olive5: var(--oliveLight5);
-    --olive6: var(--oliveLight6);
-    --olive7: var(--oliveLight7);
-    --olive8: var(--oliveLight8);
-    --olive9: var(--oliveLight9);
-    --olive10: var(--oliveLight10);
-    --olive11: var(--oliveLight11);
-    --olive12: var(--oliveLight12);
-
     --grass1: var(--grassLight1);
     --grass2: var(--grassLight2);
     --grass3: var(--grassLight3);
@@ -85,24 +98,37 @@
     --grass11: var(--grassLight11);
     --grass12: var(--grassLight12);
 
+    --grassA1: var(--grassLightA1);
+    --grassA2: var(--grassLightA2);
+    --grassA3: var(--grassLightA3);
+    --grassA4: var(--grassLightA4);
+    --grassA5: var(--grassLightA5);
+    --grassA6: var(--grassLightA6);
+    --grassA7: var(--grassLightA7);
+    --grassA8: var(--grassLightA8);
+    --grassA9: var(--grassLightA9);
+    --grassA10: var(--grassLightA10);
+    --grassA11: var(--grassLightA11);
+    --grassA12: var(--grassLightA12);
+
+    --olive1: var(--oliveLight1);
+    --olive2: var(--oliveLight2);
+    --olive3: var(--oliveLight3);
+    --olive4: var(--oliveLight4);
+    --olive5: var(--oliveLight5);
+    --olive6: var(--oliveLight6);
+    --olive7: var(--oliveLight7);
+    --olive8: var(--oliveLight8);
+    --olive9: var(--oliveLight9);
+    --olive10: var(--oliveLight10);
+    --olive11: var(--oliveLight11);
+    --olive12: var(--oliveLight12);
+
     --error: var(--errorLight);
   }
 
   .theme-invert,
   .theme-invert * {
-    --olive1: var(--oliveDark1);
-    --olive2: var(--oliveDark2);
-    --olive3: var(--oliveDark3);
-    --olive4: var(--oliveDark4);
-    --olive5: var(--oliveDark5);
-    --olive6: var(--oliveDark6);
-    --olive7: var(--oliveDark7);
-    --olive8: var(--oliveDark8);
-    --olive9: var(--oliveDark9);
-    --olive10: var(--oliveDark10);
-    --olive11: var(--oliveDark11);
-    --olive12: var(--oliveDark12);
-
     --grass1: var(--grassDark1);
     --grass2: var(--grassDark2);
     --grass3: var(--grassDark3);
@@ -115,6 +141,32 @@
     --grass10: var(--grassDark10);
     --grass11: var(--grassDark11);
     --grass12: var(--grassDark12);
+
+    --grassA1: var(--grassDarkA1);
+    --grassA2: var(--grassDarkA2);
+    --grassA3: var(--grassDarkA3);
+    --grassA4: var(--grassDarkA4);
+    --grassA5: var(--grassDarkA5);
+    --grassA6: var(--grassDarkA6);
+    --grassA7: var(--grassDarkA7);
+    --grassA8: var(--grassDarkA8);
+    --grassA9: var(--grassDarkA9);
+    --grassA10: var(--grassDarkA10);
+    --grassA11: var(--grassDarkA11);
+    --grassA12: var(--grassDarkA12);
+
+    --olive1: var(--oliveDark1);
+    --olive2: var(--oliveDark2);
+    --olive3: var(--oliveDark3);
+    --olive4: var(--oliveDark4);
+    --olive5: var(--oliveDark5);
+    --olive6: var(--oliveDark6);
+    --olive7: var(--oliveDark7);
+    --olive8: var(--oliveDark8);
+    --olive9: var(--oliveDark9);
+    --olive10: var(--oliveDark10);
+    --olive11: var(--oliveDark11);
+    --olive12: var(--oliveDark12);
 
     --error: var(--errorDark);
   }
@@ -124,19 +176,6 @@
   :root,
   .theme-regular,
   .theme-regular * {
-    --olive1: var(--oliveDark1);
-    --olive2: var(--oliveDark2);
-    --olive3: var(--oliveDark3);
-    --olive4: var(--oliveDark4);
-    --olive5: var(--oliveDark5);
-    --olive6: var(--oliveDark6);
-    --olive7: var(--oliveDark7);
-    --olive8: var(--oliveDark8);
-    --olive9: var(--oliveDark9);
-    --olive10: var(--oliveDark10);
-    --olive11: var(--oliveDark11);
-    --olive12: var(--oliveDark12);
-
     --grass1: var(--grassDark1);
     --grass2: var(--grassDark2);
     --grass3: var(--grassDark3);
@@ -150,24 +189,37 @@
     --grass11: var(--grassDark11);
     --grass12: var(--grassDark12);
 
+    --grassA1: var(--grassDarkA1);
+    --grassA2: var(--grassDarkA2);
+    --grassA3: var(--grassDarkA3);
+    --grassA4: var(--grassDarkA4);
+    --grassA5: var(--grassDarkA5);
+    --grassA6: var(--grassDarkA6);
+    --grassA7: var(--grassDarkA7);
+    --grassA8: var(--grassDarkA8);
+    --grassA9: var(--grassDarkA9);
+    --grassA10: var(--grassDarkA10);
+    --grassA11: var(--grassDarkA11);
+    --grassA12: var(--grassDarkA12);
+
+    --olive1: var(--oliveDark1);
+    --olive2: var(--oliveDark2);
+    --olive3: var(--oliveDark3);
+    --olive4: var(--oliveDark4);
+    --olive5: var(--oliveDark5);
+    --olive6: var(--oliveDark6);
+    --olive7: var(--oliveDark7);
+    --olive8: var(--oliveDark8);
+    --olive9: var(--oliveDark9);
+    --olive10: var(--oliveDark10);
+    --olive11: var(--oliveDark11);
+    --olive12: var(--oliveDark12);
+
     --error: var(--errorDark);
   }
 
   .theme-invert,
   .theme-invert * {
-    --olive1: var(--oliveLight1);
-    --olive2: var(--oliveLight2);
-    --olive3: var(--oliveLight3);
-    --olive4: var(--oliveLight4);
-    --olive5: var(--oliveLight5);
-    --olive6: var(--oliveLight6);
-    --olive7: var(--oliveLight7);
-    --olive8: var(--oliveLight8);
-    --olive9: var(--oliveLight9);
-    --olive10: var(--oliveLight10);
-    --olive11: var(--oliveLight11);
-    --olive12: var(--oliveLight12);
-
     --grass1: var(--grassLight1);
     --grass2: var(--grassLight2);
     --grass3: var(--grassLight3);
@@ -180,6 +232,32 @@
     --grass10: var(--grassLight10);
     --grass11: var(--grassLight11);
     --grass12: var(--grassLight12);
+
+    --grassA1: var(--grassLightA1);
+    --grassA2: var(--grassLightA2);
+    --grassA3: var(--grassLightA3);
+    --grassA4: var(--grassLightA4);
+    --grassA5: var(--grassLightA5);
+    --grassA6: var(--grassLightA6);
+    --grassA7: var(--grassLightA7);
+    --grassA8: var(--grassLightA8);
+    --grassA9: var(--grassLightA9);
+    --grassA10: var(--grassLightA10);
+    --grassA11: var(--grassLightA11);
+    --grassA12: var(--grassLightA12);
+
+    --olive1: var(--oliveLight1);
+    --olive2: var(--oliveLight2);
+    --olive3: var(--oliveLight3);
+    --olive4: var(--oliveLight4);
+    --olive5: var(--oliveLight5);
+    --olive6: var(--oliveLight6);
+    --olive7: var(--oliveLight7);
+    --olive8: var(--oliveLight8);
+    --olive9: var(--oliveLight9);
+    --olive10: var(--oliveLight10);
+    --olive11: var(--oliveLight11);
+    --olive12: var(--oliveLight12);
 
     --error: var(--errorLight);
   }
