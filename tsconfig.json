@@ -2,7 +2,7 @@
   "include": ["remix.env.d.ts", "app/**/*.ts", "app/**/*.tsx", "prisma/**/*.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2019",
     "lib": ["dom", "dom.iterable", "esnext"],
     "esModuleInterop": true,
     "skipLibCheck": true,
