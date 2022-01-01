@@ -10,7 +10,7 @@ import type {TSignIn} from "~/features/sign-in/SignInForm"
 import SignInForm, {signInSchema} from "~/features/sign-in/SignInForm"
 import {commitSession, getSession} from "~/sessions.server"
 import {compare} from "~/util/bcrypt.server"
-import client from "~/util/prisma.server"
+import {db} from "~/util/prisma.server"
 import type {ValidationErrorObj} from "~/util/validation"
 import {validate, ValidationError} from "~/util/validation"
 
@@ -29,7 +29,7 @@ export const action: ActionFunction = async ({request}): Promise<ValidationError
     return err.errorObj
   }
 
-  const user = await client.user.findUnique({where: {email: credentials.email}})
+  const user = await db.user.findUnique({where: {email: credentials.email}})
   if (!user || !compare(credentials.password, user.passwordHash)) return {root: [`Invalid email-password combination.`]}
 
   const session = await getSession(request.headers.get(`Cookie`))

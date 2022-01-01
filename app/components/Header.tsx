@@ -4,11 +4,10 @@ import Button from "~/components/atoms/Button"
 
 const Header: FC = () => {
   return (
-    <header className="bg-olive-1">
-      <span>Finances</span>
+    <header className="bg-olive-1 flex justify-between items-center">
+      <img src="/logo.svg" className="h-12" />
       <div>
-        <Button>Sign in</Button>
-        <Button>Sign up</Button>
+        <Button>Sign out</Button>
       </div>
     </header>
   )

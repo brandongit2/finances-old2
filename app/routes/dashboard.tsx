@@ -3,6 +3,7 @@ import {redirect} from "remix"
 import type {FC} from "react"
 import type {LoaderFunction} from "remix"
 
+import Header from "~/components/Header"
 import {getSession} from "~/sessions.server"
 
 export const loader: LoaderFunction = async ({request}) => {
@@ -12,7 +13,12 @@ export const loader: LoaderFunction = async ({request}) => {
 }
 
 const Dashboard: FC = () => {
-  return <div>dashboard</div>
+  return (
+    <div>
+      <Header />
+      dashboard
+    </div>
+  )
 }
 
 export default Dashboard

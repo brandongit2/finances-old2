@@ -1,7 +1,7 @@
 import type {Prisma} from "@prisma/client"
 
 import {hash} from "~/util/bcrypt.server"
-import client from "~/util/prisma.server"
+import {db} from "~/util/prisma.server"
 
 export type CreateUserParams = Omit<Prisma.UserCreateInput, `passwordHash`> & {password: string}
 
@@ -9,7 +9,7 @@ export async function createUser(params: CreateUserParams): Promise<CreateUserPa
   const passwordHash = hash(params.password)
 
   const {password, ...finalParams} = {...params, passwordHash}
-  await client.user.create({data: finalParams})
+  await db.user.create({data: finalParams})
 
   return params
 }
