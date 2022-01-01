@@ -1,6 +1,10 @@
 import {createSessionStorage} from "remix"
+import invariant from "tiny-invariant"
 
 import {db} from "~/util/prisma.server"
+
+const COOKIE_SECRET = process.env.COOKIE_SECRET
+invariant(COOKIE_SECRET, `Environment variable "COOKIE_SECRET" not found.`)
 
 const {getSession, commitSession, destroySession} = createSessionStorage({
   cookie: {
@@ -8,7 +12,7 @@ const {getSession, commitSession, destroySession} = createSessionStorage({
 
     httpOnly: true,
     sameSite: `lax`,
-    secrets: [process.env.COOKIE_SECRET!],
+    secrets: [COOKIE_SECRET],
     secure: true,
   },
   async createData(data) {
@@ -23,7 +27,11 @@ const {getSession, commitSession, destroySession} = createSessionStorage({
   },
   async updateData(id, data) {
     const string = JSON.stringify(data)
-    await db.sessionData.update({where: {id}, data: {data: string}})
+    try {
+      await db.sessionData.update({where: {id}, data: {data: string}})
+    } catch (err) {
+      // TODO: What happens if the id is invalid?
+    }
   },
   async deleteData(id) {
     await db.sessionData.delete({where: {id}})
