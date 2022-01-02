@@ -1,6 +1,7 @@
 import * as yup from "yup"
 
 import type {YupShape} from "~/types/YupShape"
+
 import formDataToJson from "~/util/formDataToJson"
 
 yup.setLocale({
@@ -17,6 +18,7 @@ yup.setLocale({
   },
 })
 
+export const id = yup.string().min(10).max(50)
 export const email = yup.string().email(`Invalid email.`).max(500)
 export const password = yup
   .string()

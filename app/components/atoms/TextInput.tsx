@@ -6,7 +6,7 @@ import type {FC, HTMLInputTypeAttribute} from "react"
 import {currencyAmt} from "~/util/regex"
 
 type TextInputProps = {
-  initialValue?: string
+  initialValue?: string | number
   type?: HTMLInputTypeAttribute | `currency`
 }
 

@@ -18,7 +18,7 @@ import TransactionPreview from "~/features/transactions/TransactionPreview"
 const Transactions: FC = () => {
   const transactions = useLoaderData<Transaction[]>()
 
-  const [transactionBeingEdited, setTransactionBeingEdited] = useState<string | null>(null)
+  const [expandedTransaction, setExpandedTransaction] = useState<string | null>(null)
   const [newTransactionFormKey, setNewTransactionFormKey] = useState<string | null>(null)
 
   return (
@@ -26,13 +26,15 @@ const Transactions: FC = () => {
       <div className="p-4 pb-20 flex flex-col gap-4">
         <Heading lvl={2}>Transactions</Heading>
         <Hr />
-        {transactions.map((transaction) =>
-          transaction.id === transactionBeingEdited ? (
-            <TransactionForm key={transaction.id} transaction={transaction} />
-          ) : (
-            <TransactionPreview key={transaction.id} transaction={transaction} />
-          ),
-        )}
+        {transactions.map((transaction) => (
+          <TransactionPreview
+            key={transaction.id}
+            transaction={transaction}
+            expanded={transaction.id === expandedTransaction}
+            onExpand={() => setExpandedTransaction(transaction.id)}
+            onCollapse={() => setExpandedTransaction(null)}
+          />
+        ))}
         {newTransactionFormKey && (
           <TransactionForm key={newTransactionFormKey} create onClose={() => setNewTransactionFormKey(null)} />
         )}

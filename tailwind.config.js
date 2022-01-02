@@ -5,6 +5,7 @@ module.exports = {
   content: [`./app/**/*.tsx`],
   theme: {
     colors: {
+      current: `currentColor`,
       grass: {
         1: `var(--grass1)`,
         2: `var(--grass2)`,
