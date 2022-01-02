@@ -23,21 +23,25 @@ const Transactions: FC = () => {
 
   return (
     <ScrollContainer className="bg-olive-3 rounded-lg">
-      <div className="p-4 pb-20 flex flex-col gap-4">
-        <Heading lvl={2}>Transactions</Heading>
-        <Hr />
-        {transactions.map((transaction) => (
-          <TransactionPreview
-            key={transaction.id}
-            transaction={transaction}
-            expanded={transaction.id === expandedTransaction}
-            onExpand={() => setExpandedTransaction(transaction.id)}
-            onCollapse={() => setExpandedTransaction(null)}
-          />
-        ))}
-        {newTransactionFormKey && (
-          <TransactionForm key={newTransactionFormKey} create onClose={() => setNewTransactionFormKey(null)} />
-        )}
+      <div className="pb-20 flex flex-col">
+        <div className="sticky top-0 p-4 pb-0 bg-olive-3">
+          <Heading lvl={2}>Transactions</Heading>
+          <Hr className="mt-4" />
+        </div>
+        <div className="mx-2 mt-2">
+          {transactions.map((transaction) => (
+            <TransactionPreview
+              key={transaction.id}
+              transaction={transaction}
+              expanded={transaction.id === expandedTransaction}
+              onExpand={() => setExpandedTransaction(transaction.id)}
+              onCollapse={() => setExpandedTransaction(null)}
+            />
+          ))}
+          {newTransactionFormKey && (
+            <TransactionForm key={newTransactionFormKey} create onClose={() => setNewTransactionFormKey(null)} />
+          )}
+        </div>
 
         <Popover.Root>
           <Popover.Trigger className="absolute bottom-4 right-4">
@@ -67,7 +71,11 @@ export default Transactions
 
 const TransactionTypeButton: FC<ComponentProps<typeof Button>> = ({children, className, ...props}) => {
   return (
-    <Button unstyled {...props} className={clsx(`px-3 py-2 rounded transition-colors hover:bg-olive-3`, className)}>
+    <Button
+      unstyled
+      {...props}
+      className={clsx(`px-3 py-2 rounded transition-colors hover:bg-olive-3 select-none`, className)}
+    >
       {children}
     </Button>
   )

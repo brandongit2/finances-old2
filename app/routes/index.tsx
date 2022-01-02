@@ -2,16 +2,16 @@ import {redirect} from "remix"
 
 import type {FC} from "react"
 import type {ActionFunction, LoaderFunction} from "remix"
+import type {TSignIn} from "~/features/sign-in/SignInForm"
+import type {ValidationErrorObj} from "~/util/validation"
 
 import A from "~/components/atoms/A"
 import Card from "~/components/atoms/Card"
 import Hr from "~/components/atoms/Hr"
-import type {TSignIn} from "~/features/sign-in/SignInForm"
 import SignInForm, {signInSchema} from "~/features/sign-in/SignInForm"
 import {commitSession, getSession} from "~/sessions.server"
 import {compare} from "~/util/bcrypt.server"
 import {db} from "~/util/prisma.server"
-import type {ValidationErrorObj} from "~/util/validation"
 import {validate, ValidationError} from "~/util/validation"
 
 export const loader: LoaderFunction = async ({request}) => {

@@ -41,14 +41,12 @@ const TransactionPreview: FC<TransactionPreviewProps> = ({transaction, expanded 
   return (
     <div
       className={clsx(
-        `-m-2 px-4 py-2 rounded-md transition-colors hover:bg-olive-5 flex flex-col gap-4`,
+        `px-4 py-2 rounded-md transition-colors hover:bg-olive-5 flex flex-col gap-4 cursor-pointer`,
         expanded && `bg-olive-5`,
       )}
+      onClick={() => (expanded ? onCollapse() : onExpand())}
     >
-      <div
-        className=" flex justify-between items-center gap-2 cursor-pointer"
-        onClick={() => (expanded ? onCollapse() : onExpand())}
-      >
+      <div className=" flex justify-between items-center gap-2">
         <div className="flex flex-col">
           <span className="text-lg font-bold">{transaction.name}</span>
           <span className="text-olive-11 text-sm">{dayjs(transaction.createdAt).format(`MMM. DD, YYYY`)}</span>
@@ -57,11 +55,11 @@ const TransactionPreview: FC<TransactionPreviewProps> = ({transaction, expanded 
       </div>
 
       {expanded && (
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2 -mx-0.5">
           <Button
             unstyled
             onClick={() => setEditMode(cuid())}
-            className="px-4 py-2 bg-olive-3 rounded-md flex items-center justify-center gap-4"
+            className="px-4 py-2 bg-olive-3 rounded-md flex items-center justify-center gap-4 select-none"
           >
             <PencilIcon className="h-4 fill-current" />
             Edit
@@ -69,7 +67,7 @@ const TransactionPreview: FC<TransactionPreviewProps> = ({transaction, expanded 
           <Button
             unstyled
             onClick={deleteTransaction}
-            className="px-4 py-2 bg-olive-3 rounded-md flex items-center justify-center gap-4"
+            className="px-4 py-2 bg-olive-3 rounded-md flex items-center justify-center gap-4 select-none"
           >
             <TrashIcon className="h-4 fill-current" />
             Delete

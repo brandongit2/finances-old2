@@ -72,6 +72,8 @@ module.exports = {
     plugin(({addUtilities, addVariant}) => {
       addVariant(`children`, `& > *`)
 
+      addVariant(`autofill`, [`&:-webkit-autofill`, `&:-webkit-autofill:hover`, `&:-webkit-autofill:focus`])
+
       addVariant(`radix-open`, `&[data-state="open"]`)
       addVariant(`radix-closed`, `&[data-state="closed"]`)
       addVariant(`radix-visible`, `&[data-state="visible"]`)

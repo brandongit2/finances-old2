@@ -10,6 +10,10 @@ body {
   background-color: var(--olive1);
 }
 
+::selection {
+  background: var(--grass8);
+}
+
 div,
 p,
 h1,

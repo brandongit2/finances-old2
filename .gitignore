@@ -25,3 +25,6 @@ yarn-error.log*
 **/supabase/.env
 
 app/tailwind.css
+
+.netlify
+netlify/functions/server/build

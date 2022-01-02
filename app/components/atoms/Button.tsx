@@ -26,7 +26,7 @@ const Button: FC<ButtonProps & JSX.IntrinsicElements[`button`]> = ({
         unstyled
           ? className
           : clsx(
-              `text-center my-0.5`,
+              `text-center my-0.5 select-none`,
               circle ? `rounded-full p-4` : `px-3 py-1 rounded font-semibold`,
               filled ? `bg-grass-9 text-grass-1` : `text-grass-11 border border-grass-8`,
               small && `text-sm`,
