@@ -47,6 +47,20 @@ module.exports = {
         11: `var(--olive11)`,
         12: `var(--olive12)`,
       },
+      oliveA: {
+        1: `var(--oliveA1)`,
+        2: `var(--oliveA2)`,
+        3: `var(--oliveA3)`,
+        4: `var(--oliveA4)`,
+        5: `var(--oliveA5)`,
+        6: `var(--oliveA6)`,
+        7: `var(--oliveA7)`,
+        8: `var(--oliveA8)`,
+        9: `var(--oliveA9)`,
+        10: `var(--oliveA10)`,
+        11: `var(--oliveA11)`,
+        12: `var(--oliveA12)`,
+      },
       error: `var(--error)`,
     },
     fontFamily: {
@@ -54,13 +68,36 @@ module.exports = {
     },
   },
   plugins: [
-    plugin(({addUtilities}) => {
+    plugin(({addUtilities, addVariant}) => {
+      addVariant(`children`, `& > *`)
+
+      addVariant(`radix-open`, `&[data-state="open"]`)
+      addVariant(`radix-closed`, `&[data-state="closed"]`)
+      addVariant(`radix-visible`, `&[data-state="visible"]`)
+      addVariant(`radix-hidden`, `&[data-state="hidden"]`)
+      addVariant(`radix-checked`, `&[data-state="checked"]`)
+      addVariant(`radix-unchecked`, `&[data-state="unchecked"]`)
+
       addUtilities({
         ".hard-center": {
           position: `absolute`,
           left: `50%`,
           top: `50%`,
           transform: `translate(-50%, -50%)`,
+        },
+
+        ".increase-touch-target": {
+          "&::before": {
+            content: `""`,
+            position: `absolute`,
+            top: `50%`,
+            left: `50%`,
+            transform: `translate(-50%, -50%)`,
+            width: `100%`,
+            height: `100%`,
+            minWidth: `32px`,
+            minHeight: `32px`,
+          },
         },
       })
     }),

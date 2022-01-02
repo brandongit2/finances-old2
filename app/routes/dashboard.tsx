@@ -1,16 +1,12 @@
 import {Outlet, redirect} from "remix"
 
 import type {FC} from "react"
-import type {LoaderFunction, ActionFunction} from "remix"
+import type {LoaderFunction} from "remix"
 
 import Header from "~/components/Header"
 import Transactions from "~/features/transactions/Transactions"
 import {getSession} from "~/sessions.server"
 import {db} from "~/util/prisma.server"
-
-export const action: ActionFunction = async ({request}) => {
-  const formData = await request.formData()
-}
 
 export const loader: LoaderFunction = async ({request}) => {
   const session = await getSession(request.headers.get(`Cookie`))
@@ -25,13 +21,13 @@ const DashboardLayout: FC = () => {
     <div className="h-full grid grid-rows-[auto_1fr]">
       <Header />
       <div
-        className="p-6 pt-2 grid grid-rows-[1fr] grid-cols-[20rem_30rem_1fr] gap-4"
-        style={{gridTemplateAreas: `"transactions transaction-preview ."`}}
+        className="h-full p-6 pt-2 grid grid-rows-[1fr] grid-cols-[20rem_30rem_1fr] gap-4"
+        style={{gridTemplateAreas: `"transactions ."`}}
       >
-        <div className="[grid-area:transactions] grid place-items-stretch">
+        <div className="h-full [grid-area:transactions] relative flex flex-col items-stretch children:flex-[1_1_0px]">
           <Transactions />
         </div>
-        <div className="[grid-area:transaction-preview] grid place-items-stretch">
+        <div className="h-full grid place-items-stretch">
           <Outlet />
         </div>
       </div>

@@ -18,7 +18,7 @@ module.exports = {
           [`internal`, `parent`, `index`, `sibling`],
         ],
         pathGroups: [{pattern: `~/**`, group: `internal`}],
-        pathGroupsExcludedImportTypes: [`builtin`],
+        pathGroupsExcludedImportTypes: [`type`],
         "newlines-between": `always`,
         alphabetize: {order: `asc`, caseInsensitive: true},
         warnOnUnassignedImports: true,

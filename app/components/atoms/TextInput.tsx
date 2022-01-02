@@ -3,6 +3,8 @@ import {useState} from "react"
 
 import type {FC, HTMLInputTypeAttribute} from "react"
 
+import {currencyAmt} from "~/util/regex"
+
 type TextInputProps = {
   initialValue?: string
   type?: HTMLInputTypeAttribute | `currency`
@@ -18,7 +20,7 @@ const TextInput: FC<Omit<JSX.IntrinsicElements[`input`], `type` | `value`> & Tex
   const [value, setValue] = useState((type === `currency` ? `$` : ``) + initialValue)
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (evt) => {
-    if (type === `currency` && !/^\$[0-9]*(\.[0-9]{0,2})?$/.test(evt.target.value)) return
+    if (type === `currency` && !currencyAmt.test(evt.target.value)) return
     setValue(evt.target.value)
   }
 

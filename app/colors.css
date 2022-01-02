@@ -64,6 +64,19 @@
   --oliveLight11: #6b716a;
   --oliveLight12: #141e12;
 
+  --oliveLightA1: #05580503;
+  --oliveLightA2: #054d0507;
+  --oliveLightA3: #0027000d;
+  --oliveLightA4: #022a0213;
+  --oliveLightA5: #02210219;
+  --oliveLightA6: #0122011f;
+  --oliveLightA7: #001a0027;
+  --oliveLightA8: #051a013d;
+  --oliveLightA9: #020f0075;
+  --oliveLightA10: #030e007f;
+  --oliveLightA11: #020c0095;
+  --oliveLightA12: #020d00ed;
+
   --oliveDark1: #151715;
   --oliveDark2: #1a1d19;
   --oliveDark3: #20241f;
@@ -76,6 +89,19 @@
   --oliveDark10: #778175;
   --oliveDark11: #9aa299;
   --oliveDark12: #eceeec;
+
+  --oliveDarkA1: #00000000;
+  --oliveDarkA2: #d5feaf07;
+  --oliveDarkA3: #d6fbc40f;
+  --oliveDarkA4: #effee214;
+  --oliveDarkA5: #e9fedf1b;
+  --oliveDarkA6: #ecfee521;
+  --oliveDarkA7: #f1feeb2c;
+  --oliveDarkA8: #f1ffed40;
+  --oliveDarkA9: #e6ffe165;
+  --oliveDarkA10: #ebffe775;
+  --oliveDarkA11: #f3fff199;
+  --oliveDarkA12: #fdfffdec;
 
   --errorLight: #cd2b31;
   --errorDark: #ff6369;
@@ -124,6 +150,19 @@
     --olive11: var(--oliveLight11);
     --olive12: var(--oliveLight12);
 
+    --oliveA1: var(--oliveLightA1);
+    --oliveA2: var(--oliveLightA2);
+    --oliveA3: var(--oliveLightA3);
+    --oliveA4: var(--oliveLightA4);
+    --oliveA5: var(--oliveLightA5);
+    --oliveA6: var(--oliveLightA6);
+    --oliveA7: var(--oliveLightA7);
+    --oliveA8: var(--oliveLightA8);
+    --oliveA9: var(--oliveLightA9);
+    --oliveA10: var(--oliveLightA10);
+    --oliveA11: var(--oliveLightA11);
+    --oliveA12: var(--oliveLightA12);
+
     --error: var(--errorLight);
   }
 
@@ -167,6 +206,19 @@
     --olive10: var(--oliveDark10);
     --olive11: var(--oliveDark11);
     --olive12: var(--oliveDark12);
+
+    --oliveA1: var(--oliveDarkA1);
+    --oliveA2: var(--oliveDarkA2);
+    --oliveA3: var(--oliveDarkA3);
+    --oliveA4: var(--oliveDarkA4);
+    --oliveA5: var(--oliveDarkA5);
+    --oliveA6: var(--oliveDarkA6);
+    --oliveA7: var(--oliveDarkA7);
+    --oliveA8: var(--oliveDarkA8);
+    --oliveA9: var(--oliveDarkA9);
+    --oliveA10: var(--oliveDarkA10);
+    --oliveA11: var(--oliveDarkA11);
+    --oliveA12: var(--oliveDarkA12);
 
     --error: var(--errorDark);
   }
@@ -215,6 +267,19 @@
     --olive11: var(--oliveDark11);
     --olive12: var(--oliveDark12);
 
+    --oliveA1: var(--oliveDarkA1);
+    --oliveA2: var(--oliveDarkA2);
+    --oliveA3: var(--oliveDarkA3);
+    --oliveA4: var(--oliveDarkA4);
+    --oliveA5: var(--oliveDarkA5);
+    --oliveA6: var(--oliveDarkA6);
+    --oliveA7: var(--oliveDarkA7);
+    --oliveA8: var(--oliveDarkA8);
+    --oliveA9: var(--oliveDarkA9);
+    --oliveA10: var(--oliveDarkA10);
+    --oliveA11: var(--oliveDarkA11);
+    --oliveA12: var(--oliveDarkA12);
+
     --error: var(--errorDark);
   }
 
@@ -258,6 +323,19 @@
     --olive10: var(--oliveLight10);
     --olive11: var(--oliveLight11);
     --olive12: var(--oliveLight12);
+
+    --oliveA1: var(--oliveLightA1);
+    --oliveA2: var(--oliveLightA2);
+    --oliveA3: var(--oliveLightA3);
+    --oliveA4: var(--oliveLightA4);
+    --oliveA5: var(--oliveLightA5);
+    --oliveA6: var(--oliveLightA6);
+    --oliveA7: var(--oliveLightA7);
+    --oliveA8: var(--oliveLightA8);
+    --oliveA9: var(--oliveLightA9);
+    --oliveA10: var(--oliveLightA10);
+    --oliveA11: var(--oliveLightA11);
+    --oliveA12: var(--oliveLightA12);
 
     --error: var(--errorLight);
   }

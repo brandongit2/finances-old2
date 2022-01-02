@@ -6,8 +6,8 @@ import type {YupShape} from "~/types/YupShape"
 import type {ValidationErrorObj} from "~/util/validation"
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function useValidation<Obj>(schema: yup.ObjectSchema<YupShape<Obj>>) {
-  const errorsFromServer = useActionData<ValidationErrorObj<Obj>>()
+export function useValidation<Obj>(schema: yup.ObjectSchema<YupShape<Obj>>, serverErrors?: ValidationErrorObj<Obj>) {
+  const errorsFromServer = serverErrors || useActionData<ValidationErrorObj<Obj>>()
   const [errors, setErrors] = useState<ValidationErrorObj<Obj>>({})
 
   useEffect(() => {

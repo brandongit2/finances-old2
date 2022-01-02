@@ -1,0 +1,67 @@
+import * as ScrollArea from "@radix-ui/react-scroll-area"
+import clsx from "clsx"
+
+import type {FC} from "react"
+
+type ScrollContainerProps = {
+  permanent?: boolean
+  marginStart?: string
+  marginEnd?: string
+  orientation?: `vertical` | `horizontal` | `both`
+}
+
+const ScrollContainer: FC<ScrollContainerProps & Omit<React.ComponentProps<typeof ScrollArea.Root>, `asChild`>> = ({
+  permanent = false,
+  marginStart,
+  marginEnd,
+  orientation = `vertical`,
+  children,
+  className,
+  ...props
+}) => {
+  return (
+    <ScrollArea.Root {...props} className={clsx(`overflow-hidden`, className)} type="scroll" scrollHideDelay={400}>
+      <ScrollArea.Viewport className="max-h-full w-full">{children}</ScrollArea.Viewport>
+
+      {(orientation === `vertical` || orientation === `both`) && (
+        <ScrollArea.Scrollbar
+          forceMount
+          orientation="vertical"
+          className={clsx(
+            `w-3 p-0.5 bg-oliveA-6 increase-touch-target`,
+            !permanent && `opacity-0 hover:opacity-100 radix-visible:opacity-100 transition-opacity duration-500`,
+          )}
+          style={{marginTop: marginStart, marginBottom: marginEnd}}
+        >
+          <ScrollArea.Thumb
+            className="
+              rounded-full cursor-pointer bg-oliveA-9 hover:bg-oliveA-11 transition-colors
+              relative increase-touch-target
+            "
+          />
+        </ScrollArea.Scrollbar>
+      )}
+
+      {(orientation === `horizontal` || orientation === `both`) && (
+        <ScrollArea.Scrollbar
+          forceMount
+          orientation="horizontal"
+          className={clsx(
+            `h-3 p-0.5 bg-oliveA-6 flex increase-touch-target`,
+            !permanent && `opacity-0 hover:opacity-100 radix-visible:opacity-100 transition-opacity duration-500`,
+          )}
+          style={{marginTop: marginStart, marginBottom: marginEnd}}
+        >
+          <ScrollArea.Thumb
+            className="
+              rounded-full cursor-pointer bg-oliveA-9 hover:bg-oliveA-11 transition-colors
+              relative increase-touch-target
+            "
+          />
+        </ScrollArea.Scrollbar>
+      )}
+    </ScrollArea.Root>
+  )
+}
+
+export default ScrollContainer

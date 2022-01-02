@@ -45,7 +45,7 @@ const SignInForm: FC = () => {
         <FormError messages={errors.root} className="col-span-2" marginBottom />
 
         <Label className="text-right">Email</Label>
-        <TextInput type="email" name="email" {...validate(`email`)} />
+        <TextInput type="email" name="email" {...validate(`email`)} autoFocus />
         <FormError messages={errors.email} className="col-start-2" />
 
         <div className="h-4 col-span-2" />
