@@ -15,7 +15,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "postinstall": "remix setup node",
-    "start:dev": "concurrently -n tailwind,remix \"tailwindcss -o ./app/tailwind.css --watch\" \"cross-env NODE_ENV=development netlify dev\"",
+    "start:netlify-dev": "concurrently -n tailwind,remix \"tailwindcss -o ./app/tailwind.css --watch\" \"remix watch\"",
+    "start:dev": "cross-env NODE_ENV=development netlify dev",
     "start:prod": "remix-serve build",
     "build": "yarn build:css && remix build",
     "build:css": "tailwindcss -o ./app/tailwind.css",

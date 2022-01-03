@@ -1,11 +1,18 @@
 [build]
-  command = "remix build"
-  functions = "netlify/functions"
+  command = "yarn build"
   publish = "public"
 
+[build.environment]
+  DATABASE_URL = "postgresql://postgres:kxxnn94egkb52bcn@db.hnfbgfmusefqednccrah.supabase.co:5432/postgres"
+  COOKIE_SECRET = "EsJUWml9NX8pvGQL6WQ+hR7ylkmmsqj8"
+
+[functions]
+  directory = "netlify/functions"
+
 [dev]
-  command = "remix watch"
+  command = "yarn start:netlify-dev"
   port = 3000
+  autoLaunch = false
 
 [[redirects]]
   from = "/*"
@@ -13,6 +20,6 @@
   status = 200
 
 [[headers]]
-  for = "/build/*"
+  for = "/*"
   [headers.values]
     "Cache-Control" = "public, max-age=31536000, s-maxage=31536000"
