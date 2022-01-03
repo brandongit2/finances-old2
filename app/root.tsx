@@ -11,6 +11,9 @@ export function links() {
     {rel: `stylesheet`, href: colorStyles},
     {rel: `stylesheet`, href: globalStyles},
     {rel: `stylesheet`, href: tailwindStyles},
+    {rel: `icon`, href: `/favicon.svg`},
+    {rel: `alternate icon`, href: `/favicon.png`},
+    {rel: `mask-icon`, href: `/favicon.svg`, color: `#46a758`},
   ]
 }
 

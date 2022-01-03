@@ -8,6 +8,7 @@ import type {ValidationErrorObj} from "~/util/validation"
 import A from "~/components/atoms/A"
 import Card from "~/components/atoms/Card"
 import Hr from "~/components/atoms/Hr"
+import Logo from "~/components/Logo"
 import SignInForm, {signInSchema} from "~/features/sign-in/SignInForm"
 import {commitSession, getSession} from "~/sessions.server"
 import authorize, {UserType} from "~/util/authorize.server"
@@ -47,7 +48,7 @@ const Index: FC = () => {
   return (
     <div className="h-full grid place-items-center">
       <div className="h-full mx-4 my-12 flex flex-col justify-center items-stretch gap-6">
-        <img src="/logo.svg" className="w-60 mx-auto mb-4" />
+        <Logo className="w-60 mx-auto mb-4" />
 
         <div className="shadow-[0px_0px_20px_0px_var(--olive-5)]">
           <SignInForm />
