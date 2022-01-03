@@ -8,59 +8,55 @@ import {db} from "~/util/prisma.server"
 import {validate, ValidationError} from "~/util/validation"
 
 export const action: ActionFunction = async ({request}) => {
-  try {
-    switch (request.method) {
-      case `POST`: {
-        let _transactionDetails: TCreateTransaction
-        try {
-          _transactionDetails = await validate<TCreateTransaction>(request, createTransactionSchema)
-        } catch (err) {
-          if (!(err instanceof ValidationError)) throw err
-          return err.errorObj
-        }
-
-        const transactionDetails = {
-          ..._transactionDetails,
-          amount: Number(_transactionDetails.amount.replace(`$`, ``)) * 100,
-        }
-
-        await db.transaction.create({data: transactionDetails})
-
-        return {}
+  switch (request.method) {
+    case `POST`: {
+      let _transactionDetails: TCreateTransaction
+      try {
+        _transactionDetails = await validate<TCreateTransaction>(request, createTransactionSchema)
+      } catch (err) {
+        if (!(err instanceof ValidationError)) throw err
+        return err.errorObj
       }
-      case `PATCH`: {
-        let _transactionDetails: TUpdateTransaction
-        try {
-          _transactionDetails = await validate<TUpdateTransaction>(request, updateTransactionSchema)
-        } catch (err) {
-          if (!(err instanceof ValidationError)) throw err
-          return err.errorObj
-        }
 
-        const transactionDetails = {
-          ..._transactionDetails,
-          amount: Number(_transactionDetails.amount.replace(`$`, ``)) * 100,
-        }
-
-        await db.transaction.update({where: {id: transactionDetails.id}, data: transactionDetails})
-
-        return {}
+      const transactionDetails = {
+        ..._transactionDetails,
+        amount: Number(_transactionDetails.amount.replace(`$`, ``)) * 100,
       }
-      case `DELETE`: {
-        let body: TDeleteTransaction
-        try {
-          body = await validate<TDeleteTransaction>(request, deleteTransactionSchema)
-        } catch (err) {
-          if (!(err instanceof ValidationError)) throw err
-          return err.errorObj
-        }
 
-        await db.transaction.delete({where: {id: body.id}})
-        return {}
-      }
+      await db.transaction.create({data: transactionDetails})
+
+      return {}
     }
-  } catch (err) {
-    console.error(err)
+    case `PATCH`: {
+      let _transactionDetails: TUpdateTransaction
+      try {
+        _transactionDetails = await validate<TUpdateTransaction>(request, updateTransactionSchema)
+      } catch (err) {
+        if (!(err instanceof ValidationError)) throw err
+        return err.errorObj
+      }
+
+      const transactionDetails = {
+        ..._transactionDetails,
+        amount: Number(_transactionDetails.amount.replace(`$`, ``)) * 100,
+      }
+
+      await db.transaction.update({where: {id: transactionDetails.id}, data: transactionDetails})
+
+      return {}
+    }
+    case `DELETE`: {
+      let body: TDeleteTransaction
+      try {
+        body = await validate<TDeleteTransaction>(request, deleteTransactionSchema)
+      } catch (err) {
+        if (!(err instanceof ValidationError)) throw err
+        return err.errorObj
+      }
+
+      await db.transaction.delete({where: {id: body.id}})
+      return {}
+    }
   }
 }
 
