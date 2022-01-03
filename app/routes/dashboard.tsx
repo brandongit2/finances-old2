@@ -21,7 +21,7 @@ const DashboardLayout: FC = () => {
     <div className="h-full grid grid-rows-[auto_1fr]">
       <Header />
       <div
-        className="h-full p-6 pt-2 grid grid-rows-[1fr] grid-cols-[30rem_1fr] gap-4"
+        className="h-full p-6 pt-0 grid grid-rows-[1fr] grid-cols-[30rem_1fr] gap-4"
         style={{gridTemplateAreas: `"transactions ."`}}
       >
         <div className="h-full [grid-area:transactions] relative flex flex-col items-stretch children:flex-[1_1_0px]">

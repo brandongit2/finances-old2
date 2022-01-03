@@ -5,8 +5,8 @@ import Logo from "~/components/Logo"
 
 const Header: FC = () => {
   return (
-    <header className="flex justify-between items-center px-6 py-4">
-      <Logo className="h-12 select-none" />
+    <header className="flex justify-between items-center h-20 px-6 py-4">
+      <Logo className="h-10 select-none" />
       <div>
         <form method="post" action="/sign-out">
           <Button type="submit">Sign out</Button>
