@@ -10,13 +10,14 @@ import Card from "~/components/atoms/Card"
 import Hr from "~/components/atoms/Hr"
 import SignInForm, {signInSchema} from "~/features/sign-in/SignInForm"
 import {commitSession, getSession} from "~/sessions.server"
+import authorize, {UserType} from "~/util/authorize.server"
 import {compare} from "~/util/bcrypt.server"
 import {db} from "~/util/prisma.server"
 import {validate, ValidationError} from "~/util/validation"
 
 export const loader: LoaderFunction = async ({request}) => {
-  const session = await getSession(request.headers.get(`Cookie`))
-  if (session.has(`userId`)) return redirect(`/dashboard`)
+  const authorized = await authorize(request, [UserType.UNAUTHENTICATED])
+  if (!authorized) return redirect(`/dashboard`)
   return null
 }
 
