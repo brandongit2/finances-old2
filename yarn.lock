@@ -5434,6 +5434,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"core-js@npm:3.20.2":
+  version: 3.20.2
+  resolution: "core-js@npm:3.20.2"
+  checksum: dc055a5a79f2e3c2e060b4fb8a3e228fa0de16464bff3c6605646183139eebaa68c390ec6d9c3acc5677f333df510b977ee3f1d5992e6c36b1f200e35f5ed8ca
+  languageName: node
+  linkType: hard
+
 "core-util-is@npm:~1.0.0":
   version: 1.0.3
   resolution: "core-util-is@npm:1.0.3"
@@ -7576,6 +7583,7 @@ __metadata:
     change-case: 4.1.2
     clsx: 1.1.1
     concurrently: 6.5.1
+    core-js: 3.20.2
     cross-env: 7.0.3
     cuid: 2.1.8
     dayjs: 1.10.7

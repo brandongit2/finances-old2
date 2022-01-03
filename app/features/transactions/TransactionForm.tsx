@@ -26,7 +26,6 @@ const transactionShape = {
 
       const MAX_INT = 2147483647
 
-      console.log(amount)
       const parseable = amount.replaceAll(/[^-0-9.]/g, ``)
       const number = Number(parseable)
       return number * 100 <= MAX_INT // x100 because the value in the DB is in cents

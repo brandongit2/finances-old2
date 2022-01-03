@@ -1,3 +1,4 @@
+import "core-js/proposals/string-replace-all"
 import {renderToString} from "react-dom/server"
 import {RemixServer} from "remix"
 
