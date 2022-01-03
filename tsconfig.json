@@ -1,5 +1,5 @@
 {
-  "include": ["remix.env.d.ts", "app/**/*.ts", "app/**/*.tsx", "prisma/**/*.ts", "public/**/*.ts"],
+  "include": ["remix.env.d.ts", "app/**/*.ts", "app/**/*.tsx", "prisma/**/*.ts", "public/icon/svgr.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "es2019",

@@ -22,9 +22,9 @@ const Transactions: FC = () => {
   const [newTransactionFormKey, setNewTransactionFormKey] = useState<string | null>(null)
 
   return (
-    <ScrollContainer className="bg-olive-3 rounded-lg">
+    <ScrollContainer className="bg-olive-1 dark:bg-olive-3 rounded-lg light:shadow-[0px_0px_20px_0px_var(--olive-5)]">
       <div className="pb-20 flex flex-col">
-        <div className="sticky top-0 p-4 pb-0 bg-olive-3">
+        <div className="sticky top-0 p-4 pb-0 bg-olive-1 dark:bg-olive-3">
           <Heading lvl={2}>Transactions</Heading>
           <Hr className="mt-4" />
         </div>
@@ -53,7 +53,7 @@ const Transactions: FC = () => {
             side="top"
             sideOffset={8}
             align="end"
-            className="bg-olive-1 px-3 py-3 flex flex-col rounded-md"
+            className="force-dark bg-olive-1 px-3 py-3 flex flex-col rounded-md"
           >
             <Popover.Close>
               <TransactionTypeButton onClick={() => setNewTransactionFormKey(cuid())}>

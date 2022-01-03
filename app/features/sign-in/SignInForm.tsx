@@ -2,6 +2,7 @@ import {Form} from "remix"
 import * as yup from "yup"
 
 import type {FC} from "react"
+import type {YupShape} from "~/types/YupShape"
 
 import Button from "~/components/atoms/Button"
 import Card from "~/components/atoms/Card"
@@ -10,7 +11,6 @@ import Hr from "~/components/atoms/Hr"
 import Label from "~/components/atoms/Label"
 import TextInput from "~/components/atoms/TextInput"
 import FormError from "~/components/FormError"
-import type {YupShape} from "~/types/YupShape"
 import {useValidation} from "~/util/useValidation"
 import {email} from "~/util/validation"
 
@@ -30,7 +30,7 @@ const SignInForm: FC = () => {
   const {validate, errors} = useValidation<TSignIn>(signInSchema)
 
   return (
-    <Card className="flex flex-col gap-4 max-w-md">
+    <Card className="flex flex-col gap-4 max-w-md force-light">
       <Heading lvl={1} className="text-center">
         Sign in
       </Heading>

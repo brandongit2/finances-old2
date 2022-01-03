@@ -2147,6 +2147,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prettier/plugin-xml@npm:1.2.0":
+  version: 1.2.0
+  resolution: "@prettier/plugin-xml@npm:1.2.0"
+  dependencies:
+    "@xml-tools/parser": ^1.0.11
+    prettier: ">=2.3"
+  checksum: 2f9958d7f910c7ee83b5e2dd207564992952b40fdd28aea3bd5bd4c77351a72308b916f1b8fd0c6de958d67324658c655a8521c58d5dca24ef338f9307ffb0bf
+  languageName: node
+  linkType: hard
+
 "@prisma/client@npm:3.7.0":
   version: 3.7.0
   resolution: "@prisma/client@npm:3.7.0"
@@ -3606,6 +3616,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@xml-tools/parser@npm:^1.0.11":
+  version: 1.0.11
+  resolution: "@xml-tools/parser@npm:1.0.11"
+  dependencies:
+    chevrotain: 7.1.1
+  checksum: 79f32386ef935c1ba65d421e36b556fb14593c7b7e5ca99160ec8ec6dba912a00be6c32d0ab8bad35f82cb5640c05f1a8cfd1d227d563aed20ecc57d678ceab2
+  languageName: node
+  linkType: hard
+
 "@zxing/text-encoding@npm:0.9.0":
   version: 0.9.0
   resolution: "@zxing/text-encoding@npm:0.9.0"
@@ -4883,6 +4902,15 @@ __metadata:
   version: 0.7.0
   resolution: "chardet@npm:0.7.0"
   checksum: 6fd5da1f5d18ff5712c1e0aed41da200d7c51c28f11b36ee3c7b483f3696dabc08927fc6b227735eb8f0e1215c9a8abd8154637f3eff8cada5959df7f58b024d
+  languageName: node
+  linkType: hard
+
+"chevrotain@npm:7.1.1":
+  version: 7.1.1
+  resolution: "chevrotain@npm:7.1.1"
+  dependencies:
+    regexp-to-ast: 0.5.0
+  checksum: 3ba268b745b89674712930f5d5b212f0bae6218309a05e1f89301384a9a2e8482429c83b9c52f38e536c38bb1940a53c2c0e6149e15277ea6bc6a1307528474d
   languageName: node
   linkType: hard
 
@@ -7558,6 +7586,7 @@ __metadata:
   resolution: "finances@workspace:."
   dependencies:
     "@netlify/functions": 0.10.0
+    "@prettier/plugin-xml": 1.2.0
     "@prisma/client": 3.7.0
     "@radix-ui/react-dialog": 0.1.5
     "@radix-ui/react-popover": 0.1.4
@@ -12700,7 +12729,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.5.1, prettier@npm:^2.4.0":
+"prettier@npm:2.5.1, prettier@npm:>=2.3, prettier@npm:^2.4.0":
   version: 2.5.1
   resolution: "prettier@npm:2.5.1"
   bin:
@@ -13238,6 +13267,13 @@ __metadata:
     extend-shallow: ^3.0.2
     safe-regex: ^1.1.0
   checksum: 3081403de79559387a35ef9d033740e41818a559512668cef3d12da4e8a29ef34ee13c8ed1256b07e27ae392790172e8a15c8a06b72962fd4550476cde3d8f77
+  languageName: node
+  linkType: hard
+
+"regexp-to-ast@npm:0.5.0":
+  version: 0.5.0
+  resolution: "regexp-to-ast@npm:0.5.0"
+  checksum: 72e32f2a1217bb22398ac30867ddd43e16943b6b569dd4eb472de47494c7a39e34f47ee3e92ad4cbf92308f98997da366fe094a0e58eb6b93eab0ee956fff86d
   languageName: node
   linkType: hard
 

@@ -33,7 +33,7 @@ const TextInput: FC<Omit<JSX.IntrinsicElements[`input`], `type` | `value`> & Tex
       className={clsx(
         `
           w-full px-2 py-1 my-0.5 focus:bg-grassA-3 text-olive-12 border border-grass-8 rounded transition-colors
-          autofill:shadow-[0px_0px_0px_100vw_var(--grass3)_inset] autofill:[-webkit-text-fill-color:var(--olive12)]
+          autofill:shadow-[0px_0px_0px_100vw_var(--grass-3)_inset] autofill:[-webkit-text-fill-color:var(--olive-12)]
           autofill:transition-[background-color] autofill:duration-[5000s]
         `,
         className,

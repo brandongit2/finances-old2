@@ -45,15 +45,22 @@ export const action: ActionFunction = async ({request}): Promise<ValidationError
 const Index: FC = () => {
   return (
     <div className="h-full grid place-items-center">
-      <div className="h-full flex flex-col justify-center items-stretch gap-6">
+      <div className="h-full mx-4 my-12 flex flex-col justify-center items-stretch gap-6">
         <img src="/logo.svg" className="w-60 mx-auto mb-4" />
-        <SignInForm />
+
+        <div className="shadow-[0px_0px_20px_0px_var(--olive-5)]">
+          <SignInForm />
+        </div>
+
         <Hr text="OR" />
-        <Card>
-          <p className="text-center">
-            <A>Enter demo mode</A>
-          </p>
-        </Card>
+
+        <div className="shadow-[0px_0px_20px_0px_var(--olive-5)]">
+          <Card className="force-light">
+            <p className="text-center">
+              <A>Enter demo mode</A>
+            </p>
+          </Card>
+        </div>
       </div>
     </div>
   )

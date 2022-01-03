@@ -5,6 +5,11 @@ module.exports = {
     es6: true,
     node: true,
   },
+  settings: {
+    react: {
+      version: `detect`,
+    },
+  },
   rules: {
     "import/no-duplicates": 2,
     "import/no-unresolved": 0,
