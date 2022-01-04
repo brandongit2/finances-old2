@@ -59,6 +59,8 @@ const TransactionForm: FC<TransactionFormProps> = ({transaction, create, onClose
     if (fetcher.type === `done` && Object.keys(fetcher.data).length === 0) onClose?.()
   }, [fetcher.type, fetcher.data, onClose])
 
+  const transactionAmount = transaction ? (transaction.balanceAfter - transaction.balanceBefore) / 100 : undefined
+
   return (
     <fetcher.Form
       method={create ? `post` : `patch`}
@@ -87,7 +89,7 @@ const TransactionForm: FC<TransactionFormProps> = ({transaction, create, onClose
         </Label>
         <TextInput
           type="currency"
-          initialValue={transaction?.amount}
+          initialValue={transactionAmount || ``}
           name="amount"
           {...validate(`amount`)}
           onFocus={(e) => {

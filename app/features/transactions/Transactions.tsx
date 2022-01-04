@@ -38,6 +38,7 @@ const Transactions: FC = () => {
           <Hr className="absolute bottom-0" />
         </div>
 
+        {/* The vertical dotted line */}
         <div className="absolute h-full w-12 left-5">
           <div className="hard-center h-full border-2 border-olive-5 border-dotted" />
         </div>
@@ -45,13 +46,13 @@ const Transactions: FC = () => {
         <div>
           {Object.entries(transactions).map(([day, dayTransactions]) => (
             <div key={day} className="grid grid-cols-[3rem_1fr] gap-1 ml-5 mr-2">
-              <div className="justify-self-center flex flex-col items-center relative">
-                <div className="sticky top-[4.5rem] mt-2 bg-olive-7 w-12 h-12 rounded-full flex flex-col items-center justify-center z-[2]">
-                  <span className="text-xs -mb-1">{dayjs(day).format(`MMM`)}</span>
-                  <span className="font-bold">{dayjs(day).format(`D`)}</span>
-                </div>
+              {/* The date circle thing */}
+              <div className="justify-self-center sticky top-[4.5rem] mt-4 bg-olive-7 w-12 h-12 rounded-full flex flex-col items-center justify-center z-[2]">
+                <span className="text-xs -mb-1">{dayjs(day).format(`MMM`)}</span>
+                <span className="font-bold">{dayjs(day).format(`D`)}</span>
               </div>
-              <div>
+
+              <div className="mt-2">
                 {dayTransactions.map((transaction) => (
                   <TransactionPreview
                     key={transaction.id}

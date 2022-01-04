@@ -38,6 +38,8 @@ const TransactionPreview: FC<TransactionPreviewProps> = ({transaction, expanded 
     fetcher.submit({id: transaction.id}, {method: `delete`, action: `/transaction`})
   }
 
+  const transactionAmount = transaction.balanceAfter - transaction.balanceBefore
+
   return (
     <div
       className={clsx(
@@ -51,7 +53,7 @@ const TransactionPreview: FC<TransactionPreviewProps> = ({transaction, expanded 
           <span className="text-lg font-bold">{transaction.name}</span>
           <span className="text-olive-11 text-sm">{dayjs(transaction.timestamp).format(`MMM. DD, YYYY`)}</span>
         </div>
-        <span>{$(transaction.amount)}</span>
+        <span>{$(transactionAmount)}</span>
       </div>
 
       {expanded && (

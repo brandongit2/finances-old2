@@ -25,10 +25,11 @@ model SessionData {
 }
 
 model Transaction {
-  id        String   @id @default(cuid())
-  amount    Int
-  name      String
-  timestamp DateTime @default(now())
+  id            String   @id @default(cuid())
+  balanceBefore Int // In cents
+  balanceAfter  Int // In cents
+  name          String
+  timestamp     DateTime @default(now())
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
