@@ -31,22 +31,37 @@ const Transactions: FC = () => {
   return (
     <ScrollContainer className="bg-olive-1 dark:bg-olive-3 rounded-lg light:shadow-[0px_0px_20px_0px_var(--olive-5)]">
       <div className="pb-20 flex flex-col">
-        <div className="sticky top-0 p-4 pb-0 bg-olive-1 dark:bg-olive-3">
-          <Heading lvl={2}>Transactions</Heading>
-          <Hr className="mt-4" />
+        <div className="sticky top-0 h-16 bg-olive-1 dark:bg-olive-3 flex flex-col justify-around z-[3]">
+          <Heading lvl={2} className="mx-4">
+            Transactions
+          </Heading>
+          <Hr className="absolute bottom-0" />
         </div>
+
+        <div className="absolute h-full w-12 left-5">
+          <div className="hard-center h-full border-2 border-olive-5 border-dotted" />
+        </div>
+
         <div>
           {Object.entries(transactions).map(([day, dayTransactions]) => (
-            <div key={day} className="mx-2 mt-2">
-              {dayTransactions.map((transaction) => (
-                <TransactionPreview
-                  key={transaction.id}
-                  transaction={transaction}
-                  expanded={transaction.id === expandedTransaction}
-                  onExpand={() => setExpandedTransaction(transaction.id)}
-                  onCollapse={() => setExpandedTransaction(null)}
-                />
-              ))}
+            <div key={day} className="grid grid-cols-[3rem_1fr] gap-1 ml-5 mr-2">
+              <div className="justify-self-center flex flex-col items-center relative">
+                <div className="sticky top-[4.5rem] mt-2 bg-olive-7 w-12 h-12 rounded-full flex flex-col items-center justify-center z-[2]">
+                  <span className="text-xs -mb-1">{dayjs(day).format(`MMM`)}</span>
+                  <span className="font-bold">{dayjs(day).format(`D`)}</span>
+                </div>
+              </div>
+              <div>
+                {dayTransactions.map((transaction) => (
+                  <TransactionPreview
+                    key={transaction.id}
+                    transaction={transaction}
+                    expanded={transaction.id === expandedTransaction}
+                    onExpand={() => setExpandedTransaction(transaction.id)}
+                    onCollapse={() => setExpandedTransaction(null)}
+                  />
+                ))}
+              </div>
               {newTransactionFormKey && (
                 <TransactionForm key={newTransactionFormKey} create onClose={() => setNewTransactionFormKey(null)} />
               )}

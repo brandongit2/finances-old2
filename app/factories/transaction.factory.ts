@@ -20,7 +20,7 @@ export function buildTransactions(): Prisma.TransactionCreateWithoutUserInput[] 
       transactions.push({
         amount: randomInt(-300_00, 0),
         name: faker.random.arrayElement(vendors),
-        timestamp: datePointer.add(randomInt(0, 24 * 60 * 60), `minute`).toISOString(),
+        timestamp: datePointer.add(randomInt(0, 24 * 60), `minute`).toISOString(),
       })
     }
   }

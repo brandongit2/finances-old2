@@ -28,7 +28,7 @@ const ScrollContainer: FC<ScrollContainerProps & Omit<React.ComponentProps<typeo
           forceMount
           orientation="vertical"
           className={clsx(
-            `w-3 p-0.5 bg-olive-a-6 increase-touch-target`,
+            `w-3 p-0.5 bg-olive-a-6 increase-touch-target z-10`,
             !permanent && `opacity-0 hover:opacity-100 radix-visible:opacity-100 transition-opacity duration-500`,
           )}
           style={{marginTop: marginStart, marginBottom: marginEnd}}
@@ -47,7 +47,7 @@ const ScrollContainer: FC<ScrollContainerProps & Omit<React.ComponentProps<typeo
           forceMount
           orientation="horizontal"
           className={clsx(
-            `h-3 p-0.5 bg-olive-a-6 flex increase-touch-target`,
+            `h-3 p-0.5 bg-olive-a-6 flex increase-touch-target z-10`,
             !permanent && `opacity-0 hover:opacity-100 radix-visible:opacity-100 transition-opacity duration-500`,
           )}
           style={{marginTop: marginStart, marginBottom: marginEnd}}
