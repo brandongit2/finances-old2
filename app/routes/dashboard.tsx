@@ -6,13 +6,15 @@ import type {LoaderFunction} from "remix"
 import Header from "~/components/Header"
 import Transactions from "~/features/transactions/Transactions"
 import authorize, {UserType} from "~/util/authorize.server"
+import getUserId from "~/util/getUserId.server"
 import {db} from "~/util/prisma.server"
 
 export const loader: LoaderFunction = async ({request}) => {
   const authorized = await authorize(request, [UserType.AUTHENTICATED])
   if (!authorized) return redirect(`/`)
 
-  const transactions = await db.transaction.findMany({orderBy: {createdAt: `desc`}})
+  const userId = (await getUserId(request))!
+  const transactions = await db.transaction.findMany({where: {userId}, orderBy: {timestamp: `desc`}})
   return transactions
 }
 

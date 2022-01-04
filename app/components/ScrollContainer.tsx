@@ -28,14 +28,14 @@ const ScrollContainer: FC<ScrollContainerProps & Omit<React.ComponentProps<typeo
           forceMount
           orientation="vertical"
           className={clsx(
-            `w-3 p-0.5 bg-oliveA-6 increase-touch-target`,
+            `w-3 p-0.5 bg-olive-a-6 increase-touch-target`,
             !permanent && `opacity-0 hover:opacity-100 radix-visible:opacity-100 transition-opacity duration-500`,
           )}
           style={{marginTop: marginStart, marginBottom: marginEnd}}
         >
           <ScrollArea.Thumb
             className="
-              rounded-full cursor-pointer bg-oliveA-9 hover:bg-oliveA-11 transition-colors
+              rounded-full cursor-pointer bg-olive-a-9 hover:bg-olive-a-11 transition-colors
               relative increase-touch-target
             "
           />
@@ -47,14 +47,14 @@ const ScrollContainer: FC<ScrollContainerProps & Omit<React.ComponentProps<typeo
           forceMount
           orientation="horizontal"
           className={clsx(
-            `h-3 p-0.5 bg-oliveA-6 flex increase-touch-target`,
+            `h-3 p-0.5 bg-olive-a-6 flex increase-touch-target`,
             !permanent && `opacity-0 hover:opacity-100 radix-visible:opacity-100 transition-opacity duration-500`,
           )}
           style={{marginTop: marginStart, marginBottom: marginEnd}}
         >
           <ScrollArea.Thumb
             className="
-              rounded-full cursor-pointer bg-oliveA-9 hover:bg-oliveA-11 transition-colors
+              rounded-full cursor-pointer bg-olive-a-9 hover:bg-olive-a-11 transition-colors
               relative increase-touch-target
             "
           />

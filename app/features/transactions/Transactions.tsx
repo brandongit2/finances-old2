@@ -1,6 +1,7 @@
 import * as Popover from "@radix-ui/react-popover"
 import clsx from "clsx"
 import cuid from "cuid"
+import dayjs from "dayjs"
 import {useState} from "react"
 import {useLoaderData} from "remix"
 
@@ -16,7 +17,13 @@ import TransactionForm from "~/features/transactions/TransactionForm"
 import TransactionPreview from "~/features/transactions/TransactionPreview"
 
 const Transactions: FC = () => {
-  const transactions = useLoaderData<Transaction[]>()
+  const _transactions = useLoaderData<Transaction[]>()
+  const transactions: Record<string, Transaction[]> = {}
+  _transactions.forEach((transaction) => {
+    const timestamp = dayjs(transaction.timestamp).format(`YYYY-MM-DD`)
+    transactions[timestamp] ??= []
+    transactions[timestamp].push(transaction)
+  })
 
   const [expandedTransaction, setExpandedTransaction] = useState<string | null>(null)
   const [newTransactionFormKey, setNewTransactionFormKey] = useState<string | null>(null)
@@ -28,19 +35,23 @@ const Transactions: FC = () => {
           <Heading lvl={2}>Transactions</Heading>
           <Hr className="mt-4" />
         </div>
-        <div className="mx-2 mt-2">
-          {transactions.map((transaction) => (
-            <TransactionPreview
-              key={transaction.id}
-              transaction={transaction}
-              expanded={transaction.id === expandedTransaction}
-              onExpand={() => setExpandedTransaction(transaction.id)}
-              onCollapse={() => setExpandedTransaction(null)}
-            />
+        <div>
+          {Object.entries(transactions).map(([day, dayTransactions]) => (
+            <div key={day} className="mx-2 mt-2">
+              {dayTransactions.map((transaction) => (
+                <TransactionPreview
+                  key={transaction.id}
+                  transaction={transaction}
+                  expanded={transaction.id === expandedTransaction}
+                  onExpand={() => setExpandedTransaction(transaction.id)}
+                  onCollapse={() => setExpandedTransaction(null)}
+                />
+              ))}
+              {newTransactionFormKey && (
+                <TransactionForm key={newTransactionFormKey} create onClose={() => setNewTransactionFormKey(null)} />
+              )}
+            </div>
           ))}
-          {newTransactionFormKey && (
-            <TransactionForm key={newTransactionFormKey} create onClose={() => setNewTransactionFormKey(null)} />
-          )}
         </div>
 
         <Popover.Root>

@@ -8,12 +8,15 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(cuid())
+  id           String @id @default(cuid())
   firstName    String
   lastName     String
-  email        String   @unique
+  email        String @unique
   passwordHash String
-  createdAt    DateTime @default(now())
+
+  transactions Transaction[]
+
+  createdAt DateTime @default(now())
 }
 
 model SessionData {
@@ -25,5 +28,8 @@ model Transaction {
   id        String   @id @default(cuid())
   amount    Int
   name      String
-  createdAt DateTime @default(now())
+  timestamp DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 }

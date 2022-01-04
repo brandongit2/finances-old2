@@ -9,7 +9,6 @@ invariant(COOKIE_SECRET, `Environment variable "COOKIE_SECRET" not found.`)
 const {getSession, commitSession, destroySession} = createSessionStorage({
   cookie: {
     name: `session`,
-
     httpOnly: true,
     sameSite: `lax`,
     secrets: [COOKIE_SECRET],
@@ -27,11 +26,11 @@ const {getSession, commitSession, destroySession} = createSessionStorage({
   },
   async updateData(id, data) {
     const string = JSON.stringify(data)
-    try {
-      await db.sessionData.update({where: {id}, data: {data: string}})
-    } catch (err) {
-      // TODO: What happens if the id is invalid?
-    }
+    await db.sessionData.upsert({
+      where: {id},
+      create: {id, data: string},
+      update: {data: string},
+    })
   },
   async deleteData(id) {
     await db.sessionData.delete({where: {id}})

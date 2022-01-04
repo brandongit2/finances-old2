@@ -4,7 +4,7 @@
 <p align="center">Built with <a href="https://remix.run/">Remix</a> and <a href="https://tailwindcss.com/">Tailwind CSS</a>, deployed on <a href="https://www.netlify.com/">Netlify</a> and <a href="https://supabase.com/">Supabase</a>!</p>
 <p fontsize="10px" align="center">https://finances.brandontsang.net/</p>
 
-*(Screenshots coming soon)*
+_(Screenshots coming soon)_
 
 ## Dev set-up
 
@@ -14,12 +14,15 @@ Prerequisites: [Git](https://git-scm.com/), [Yarn](https://yarnpkg.com/), Supaba
 
 <details>
   <summary>How to install the Supabase CLI</summary>
-  
-  Simple! just run the following command if you have [Brew](https://brew.sh/) installed:
-  
-  ```bash
-  brew install supabase/tap/supabase
-  ```
+
+  <p>Simple! just run the following command if you have [Brew](https://brew.sh/) installed:</p>
+
+```bash
+brew install supabase/tap/supabase
+```
+
+---
+
 </details>
 
 1. Close the Git repository:
@@ -28,19 +31,43 @@ Prerequisites: [Git](https://git-scm.com/), [Yarn](https://yarnpkg.com/), Supaba
    git clone git@github.com:brandongit2/finances.git
    ```
 
-2. Install the required packages:
+1. Install the required packages:
 
    ```bash
    yarn
    ```
 
-3. Start a local development database with Supabase:
+1. Set your environment variables:
+
+   1. Make a copy of .env.example:
 
    ```bash
-   yarn run supabase start
+   cp .env.example .env
    ```
 
-4. Start the local dev server:
+   1. Populate the new .env file with values of your own.
+
+1. Set up the database:
+
+   1. Start a local Postgres database with Supabase:
+
+      ```bash
+      yarn run supabase start
+      ```
+
+   1. Push the Prisma schema to the database:
+
+      ```bash
+      yarn run prisma db push
+      ```
+
+   1. Seed the database:
+
+      ```bash
+      yarn run prisma db seed
+      ```
+
+1. Start the local dev server:
 
    ```bash
    yarn start:dev

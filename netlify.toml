@@ -2,10 +2,6 @@
   command = "yarn build"
   publish = "public"
 
-[build.environment]
-  DATABASE_URL = "postgresql://postgres:kxxnn94egkb52bcn@db.hnfbgfmusefqednccrah.supabase.co:5432/postgres"
-  COOKIE_SECRET = "EsJUWml9NX8pvGQL6WQ+hR7ylkmmsqj8"
-
 [functions]
   directory = "netlify/functions"
 
