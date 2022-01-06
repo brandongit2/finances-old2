@@ -44,7 +44,7 @@ const Overview: FC = () => {
 
   const localTranslation = useMemo(() => mat3.fromTranslation(mat3.create(), translation), [translation])
   const localTranslationInv = useMemo(() => mat3.invert(mat3.create(), localTranslation), [localTranslation])
-  const localScale = useMemo(() => mat3.fromScaling(mat3.create(), vec2.fromValues(zoom, zoom)), [zoom])
+  const localScale = useMemo(() => mat3.fromScaling(mat3.create(), vec2.fromValues(zoom, 1)), [zoom])
   const localScaleInv = useMemo(() => mat3.invert(mat3.create(), localScale), [localScale])
 
   // Some useful transformations
@@ -121,20 +121,11 @@ const Overview: FC = () => {
     resizeSvg()
 
     window.onresize = () => void resizeSvg()
-
-    // node.onwheel = (evt) => {
-    //   setZoom((zoom) => {
-    //     let newZoom = zoom + evt.deltaY / 500
-    //     if (newZoom < 0.1) newZoom = 0.1
-    //     if (newZoom > 3) newZoom = 3
-    //     return newZoom
-    //   })
-    // }
   }, [])
 
   const onPointerMove: React.PointerEventHandler<SVGSVGElement> = (evt) => {
     if (evt.buttons === 0) return
-    const mouseMovement = vec3.fromValues(evt.movementX, evt.movementY, 1)
+    const mouseMovement = vec3.fromValues(evt.movementX, 0, 1)
 
     vec3.transformMat3(mouseMovement, mouseMovement, scaleScreenToView)
     vec3.transformMat3(mouseMovement, mouseMovement, scaleViewToWorld)
@@ -142,6 +133,15 @@ const Overview: FC = () => {
     setTranslation((translation) =>
       vec2.add(vec2.create(), translation, vec2.fromValues(mouseMovement[0], mouseMovement[1])),
     )
+  }
+
+  const onWheel: React.WheelEventHandler<SVGSVGElement> = (evt) => {
+    setZoom((zoom) => {
+      let newZoom = zoom + evt.deltaY / 500
+      if (newZoom < 0.1) newZoom = 0.1
+      if (newZoom > 3) newZoom = 3
+      return newZoom
+    })
   }
 
   // const yTicks = Array(Math.abs(domain[1] - domain[0]))
@@ -167,6 +167,7 @@ const Overview: FC = () => {
           preserveAspectRatio="none"
           className="w-full flex-[1_0_0px] cursor-grab active:cursor-grabbing"
           onPointerMove={onPointerMove}
+          onWheel={onWheel}
           ref={svgRef}
         >
           <polyline

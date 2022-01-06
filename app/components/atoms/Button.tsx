@@ -1,6 +1,5 @@
 import clsx from "clsx"
-
-import type {FC} from "react"
+import {forwardRef} from "react"
 
 type ButtonProps = {
   circle?: boolean
@@ -9,19 +8,15 @@ type ButtonProps = {
   small?: boolean
 }
 
-const Button: FC<ButtonProps & JSX.IntrinsicElements[`button`]> = ({
-  circle = false,
-  filled = false,
-  unstyled = false,
-  small = false,
-  children,
-  className,
-  ...props
-}) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps & JSX.IntrinsicElements[`button`]>(function Button(
+  {circle = false, filled = false, unstyled = false, small = false, children, className, ...props},
+  ref,
+) {
   return (
     <button
       type="button"
       {...props}
+      ref={ref}
       className={
         unstyled
           ? className
@@ -37,6 +32,6 @@ const Button: FC<ButtonProps & JSX.IntrinsicElements[`button`]> = ({
       {children}
     </button>
   )
-}
+})
 
 export default Button

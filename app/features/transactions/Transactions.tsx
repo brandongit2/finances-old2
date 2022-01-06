@@ -71,7 +71,7 @@ const Transactions: FC = () => {
         </div>
 
         <Popover.Root>
-          <Popover.Trigger className="absolute bottom-4 right-4">
+          <Popover.Trigger asChild className="absolute bottom-4 right-4">
             <Button circle filled>
               <PlusIcon className="h-4 fill-grass-2" />
             </Button>

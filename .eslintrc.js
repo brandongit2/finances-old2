@@ -68,7 +68,7 @@ module.exports = {
       plugins: [`react`, `react-hooks`],
       extends: [`plugin:react/recommended`, `plugin:react-hooks/recommended`, `plugin:react/jsx-runtime`],
       rules: {
-        "@next/next/no-img-element": 0,
+        "react/display-name": 1,
         "react/jsx-boolean-value": 1,
         "react/jsx-curly-brace-presence": 1,
         "react/jsx-no-useless-fragment": [1, {allowExpressions: true}],
