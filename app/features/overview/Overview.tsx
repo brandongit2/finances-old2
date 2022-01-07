@@ -1,10 +1,25 @@
 import dayjs from "dayjs"
-import {mat3, vec2, vec3} from "gl-matrix"
 import {useCallback, useEffect, useMemo, useRef, useState} from "react"
 import {useLoaderData} from "remix"
 
 import type {Transaction} from "@prisma/client"
 import type {FC} from "react"
+
+import {avg} from "~/util/math"
+
+type Vector = [number, number]
+
+// Utility functions
+const add = (vector: Vector, amount: Vector): Vector => [vector[0] + amount[0], vector[1] + amount[1]]
+const subtract = (vector: Vector, amount: Vector): Vector => [vector[0] - amount[0], vector[1] - amount[1]]
+const scale = (vector: Vector, factorX: number, factorY = factorX): Vector => [vector[0] * factorX, vector[1] * factorY]
+const scaleAbout = (vector: Vector, origin: Vector, factorX: number, factorY = factorX): Vector => {
+  let result: Vector = [...vector]
+  result = subtract(result, origin)
+  result = scale(result, factorX, factorY)
+  result = add(result, origin)
+  return result
+}
 
 const Overview: FC = () => {
   // Fetch the transactions
@@ -29,86 +44,77 @@ const Overview: FC = () => {
     [today, transactions],
   )
 
-  const balances = useMemo(() => transactions.map((transaction) => transaction.balanceAfter), [transactions])
-  const domain = useMemo(() => [dayjs(transactions.at(-1)!.timestamp).diff(dayjs(), `day`), 0], [transactions])
-  const range = useMemo(() => [0, Math.max(...balances)], [balances])
+  const dataRange = useMemo<[number, number]>(() => {
+    const balances = transactions.map((transaction) => transaction.balanceAfter)
+    return [0, Math.max(...balances)]
+  }, [transactions])
 
   // Data about the SVG
-  const [svgPos, setSvgPos] = useState([0, 0])
-  const [svgDims, setSvgDims] = useState([1, 1])
+  const [svgPos, setSvgPos] = useState<[number, number]>([0, 0])
+  const [svgDims, setSvgDims] = useState<[number, number]>([1, 1])
+  const aspectRatio = svgDims[0] / svgDims[1]
 
   // Data about where we are on the graph
-  const [translation, setTranslation] = useState(vec2.fromValues(0, 0))
-  const [zoom, setZoom] = useState(1)
-  const mousePos = useRef<vec3 | null>(null) // In world coordinates
+  const [rangeX, setRangeX] = useState<[number, number]>([-14, 0])
+  const [rangeY, setRangeY] = useState<[number, number]>([0, dataRange[1]])
+  const mousePos = useRef<Vector | null>(null)
 
-  const localTranslation = useMemo(() => mat3.fromTranslation(mat3.create(), translation), [translation])
-  const localTranslationInv = useMemo(() => mat3.invert(mat3.create(), localTranslation), [localTranslation])
-  const localScale = useMemo(() => mat3.fromScaling(mat3.create(), vec2.fromValues(zoom, 1)), [zoom])
-  const localScaleInv = useMemo(() => mat3.invert(mat3.create(), localScale), [localScale])
-
-  // Some useful transformations
-  const translateScreenToView = useMemo(
-    () => mat3.fromTranslation(mat3.create(), vec2.fromValues(-svgPos[0], -svgPos[1])),
-    [svgPos],
-  )
-  const translateViewToScreen = useMemo(
-    () => mat3.invert(mat3.create(), translateScreenToView),
-    [translateScreenToView],
-  )
-  const scaleScreenToView = useMemo(
-    () => mat3.fromScaling(mat3.create(), vec2.fromValues(1 / svgDims[1], 1 / svgDims[1])),
-    [svgDims],
-  )
-  const scaleViewToScreen = useMemo(() => mat3.invert(mat3.create(), scaleScreenToView), [scaleScreenToView])
-
+  // Transformation functions
   const screenToView = useCallback(
-    (vec: vec3) => {
-      const result = vec3.clone(vec)
-      vec3.transformMat3(result, result, translateScreenToView)
-      vec3.transformMat3(result, result, scaleScreenToView)
+    (vector: Vector): Vector => {
+      let result: Vector = [...vector]
+      result = subtract(result, svgPos)
+      result = scale(result, 1 / svgDims[1])
+      result = scale(result, 1, -1)
+      result = add(result, [0, 1])
       return result
     },
-    [translateScreenToView, scaleScreenToView],
+    [svgPos, svgDims],
   )
 
-  const translateWorldToView = useMemo(
-    () => mat3.fromTranslation(mat3.create(), vec2.fromValues(-domain[0], -range[0])),
-    [domain, range],
+  const viewToWorld = useCallback(
+    (vector: Vector): Vector => {
+      let result: Vector = [...vector]
+      result = scale(result, (rangeX[1] - rangeX[0]) / aspectRatio, rangeY[1] - rangeY[0])
+      result = add(result, [rangeX[0], rangeY[0]])
+      return result
+    },
+    [rangeX, rangeY, aspectRatio],
   )
-  const translateViewToWorld = useMemo(() => mat3.invert(mat3.create(), translateWorldToView), [translateWorldToView])
-  const scaleWorldToView = useMemo(
-    () =>
-      mat3.fromScaling(
-        mat3.create(),
-        vec2.fromValues((1 / (domain[1] - domain[0])) * (svgDims[0] / svgDims[1]), 1 / (range[0] - range[1])),
-      ),
-    [domain, svgDims, range],
-  )
-  const scaleViewToWorld = useMemo(() => mat3.invert(mat3.create(), scaleWorldToView), [scaleWorldToView])
 
   const worldToView = useCallback(
-    (vec: vec3): vec3 => {
-      const result = vec3.clone(vec)
-      vec3.transformMat3(result, result, localTranslation)
-      vec3.transformMat3(result, result, translateWorldToView)
-      vec3.transformMat3(result, result, scaleWorldToView)
+    (vector: Vector): Vector => {
+      let result: Vector = [...vector]
+      result = subtract(result, [rangeX[0], rangeY[0]])
+      result = scale(result, aspectRatio / (rangeX[1] - rangeX[0]), 1 / (rangeY[1] - rangeY[0]))
       return result
     },
-    [localTranslation, translateWorldToView, scaleWorldToView],
+    [rangeX, rangeY, aspectRatio],
+  )
+
+  const viewToScreen = useCallback(
+    (vector: Vector): Vector => {
+      let result: Vector = [...vector]
+      result = subtract(result, [0, 1])
+      result = scale(result, 1, -1)
+      result = scale(result, svgDims[1])
+      result = add(result, svgPos)
+      return result
+    },
+    [svgPos, svgDims],
   )
 
   useEffect(() => {
     const onMouseMove = (evt: MouseEvent) => {
-      const screenMousePos = vec3.fromValues(evt.clientX, evt.clientY, 1)
-      mousePos.current = screenToView(screenMousePos)
+      const screenMousePos: Vector = [evt.clientX, evt.clientY]
+      mousePos.current = viewToWorld(screenToView(screenMousePos))
     }
 
     window.addEventListener(`mousemove`, onMouseMove)
     return () => void window.removeEventListener(`mousemove`, onMouseMove)
-  }, [screenToView])
+  }, [screenToView, viewToWorld])
 
-  const points = _points.map(([x, y]) => worldToView(vec3.fromValues(x, y, 1)))
+  const points = _points.map(([x, y]) => worldToView([x, y]))
 
   const svgRef = useCallback((node: SVGSVGElement | null) => {
     if (!node) return
@@ -125,22 +131,19 @@ const Overview: FC = () => {
 
   const onPointerMove: React.PointerEventHandler<SVGSVGElement> = (evt) => {
     if (evt.buttons === 0) return
-    const mouseMovement = vec3.fromValues(evt.movementX, 0, 1)
-
-    vec3.transformMat3(mouseMovement, mouseMovement, scaleScreenToView)
-    vec3.transformMat3(mouseMovement, mouseMovement, scaleViewToWorld)
-
-    setTranslation((translation) =>
-      vec2.add(vec2.create(), translation, vec2.fromValues(mouseMovement[0], mouseMovement[1])),
-    )
+    let mouseMovement = evt.movementX
+    mouseMovement /= svgDims[1]
+    mouseMovement *= (rangeX[1] - rangeX[0]) / aspectRatio
+    mouseMovement *= -1
+    setRangeX((rangeX) => [rangeX[0] + mouseMovement, rangeX[1] + mouseMovement])
   }
 
   const onWheel: React.WheelEventHandler<SVGSVGElement> = (evt) => {
-    setZoom((zoom) => {
-      let newZoom = zoom + evt.deltaY / 500
-      if (newZoom < 0.1) newZoom = 0.1
-      if (newZoom > 3) newZoom = 3
-      return newZoom
+    setRangeX((rangeX) => {
+      let result: [number, number] = [...rangeX]
+      if (!mousePos.current) return result
+      result = scaleAbout(result, [mousePos.current[0], mousePos.current[0]], evt.deltaY / 400 + 1)
+      return result
     })
   }
 
@@ -163,7 +166,7 @@ const Overview: FC = () => {
       </div>
       <div className="flex flex-col">
         <svg
-          viewBox={`0 -1 ${svgDims[0] / svgDims[1]} 1`}
+          viewBox={`0 0 ${aspectRatio} 1`}
           preserveAspectRatio="none"
           className="w-full flex-[1_0_0px] cursor-grab active:cursor-grabbing"
           onPointerMove={onPointerMove}
