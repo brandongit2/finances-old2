@@ -5,6 +5,9 @@ import {useLoaderData} from "remix"
 import type {Transaction} from "@prisma/client"
 import type {FC} from "react"
 
+import abbreviateNumber from "~/util/abbreviateNumber"
+import roundToNearestMultipleOf from "~/util/roundToNearestMultipleOf"
+
 type Vector = [number, number]
 
 // Utility functions
@@ -47,6 +50,19 @@ const Overview: FC = () => {
   const [svgDims, setSvgDims] = useState<[number, number]>([1, 1])
   const aspectRatio = svgDims[0] / svgDims[1]
 
+  const svgRef = useCallback((node: SVGSVGElement | null) => {
+    if (!node) return
+
+    const resizeSvg = () => {
+      const boundingBox = node.getBoundingClientRect()
+      setSvgPos([boundingBox.left, boundingBox.top])
+      setSvgDims([boundingBox.width, boundingBox.height])
+    }
+    resizeSvg()
+
+    window.onresize = () => void resizeSvg()
+  }, [])
+
   // Data about where we are on the graph
   const [rangeX, setRangeX] = useState<[number, number]>([-300, 0])
   const rangeY: [number, number] = useMemo(() => {
@@ -59,6 +75,7 @@ const Overview: FC = () => {
   // "Screen" coordinates use the top-left of the screen as the origin. +Y is down, +X is right.
   // "View" coordinates use the bottom-left of the SVG as the origin. +Y is down, +X is right.
   // "World" coordinates use an arbitrary (0, 0) as the origin. +Y is up, +X is right.
+  const scaleScreenToView = useCallback((length: number): number => length / svgDims[1], [svgDims])
   const screenToView = useCallback(
     (vector: Vector): Vector => {
       let result: Vector = [...vector]
@@ -69,6 +86,11 @@ const Overview: FC = () => {
     [svgPos, svgDims],
   )
 
+  const scaleViewToWorldX = useCallback(
+    (length: number): number => (length * (rangeX[1] - rangeX[0])) / aspectRatio,
+    [rangeX, aspectRatio],
+  )
+  const scaleViewToWorldY = useCallback((length: number): number => -length * (rangeY[1] - rangeY[0]), [rangeY])
   const viewToWorld = useCallback(
     (vector: Vector): Vector => {
       let result: Vector = [...vector]
@@ -103,6 +125,7 @@ const Overview: FC = () => {
     [svgPos, svgDims],
   )
 
+  // Update mouse position using event handler
   useEffect(() => {
     const onMouseMove = (evt: MouseEvent) => {
       const screenMousePos: Vector = [evt.clientX, evt.clientY]
@@ -113,53 +136,81 @@ const Overview: FC = () => {
     return () => void window.removeEventListener(`mousemove`, onMouseMove)
   }, [screenToView, viewToWorld])
 
-  const svgRef = useCallback((node: SVGSVGElement | null) => {
-    if (!node) return
-
-    const resizeSvg = () => {
-      const boundingBox = node.getBoundingClientRect()
-      setSvgPos([boundingBox.left, boundingBox.top])
-      setSvgDims([boundingBox.width, boundingBox.height])
-    }
-    resizeSvg()
-
-    window.onresize = () => void resizeSvg()
-  }, [])
-
+  // Handle click and drag to pan
   const onPointerMove: React.PointerEventHandler<SVGSVGElement> = (evt) => {
     if (evt.buttons === 0) return
-    let mouseMovement = evt.movementX
-    mouseMovement /= svgDims[1]
-    mouseMovement *= (rangeX[1] - rangeX[0]) / aspectRatio
-    mouseMovement *= -1
-    setRangeX((rangeX) => [rangeX[0] + mouseMovement, rangeX[1] + mouseMovement])
+    let mouseMovement = scaleViewToWorldX(scaleScreenToView(-evt.movementX))
+    setRangeX((rangeX) => {
+      if (rangeX[1] + mouseMovement > 0) return rangeX
+      return [rangeX[0] + mouseMovement, rangeX[1] + mouseMovement]
+    })
   }
 
+  // Handle scroll to zoom
   const onWheel: React.WheelEventHandler<SVGSVGElement> = (evt) => {
     setRangeX((rangeX) => {
       let result: [number, number] = [...rangeX]
       if (!mousePos.current) return result
       result = scaleAbout(result, [mousePos.current[0], mousePos.current[0]], evt.deltaY / 400 + 1)
+      if (result[1] > 0) result = subtract(result, [result[1], result[1]])
       return result
     })
   }
 
-  // const yTicks = Array(Math.abs(domain[1] - domain[0]))
-  //   .fill(undefined)
-  //   .map((_, i) => i + domain[0])
-  // .map((tick) => )
+  const preferredTickSpacing = 64 // in pixels
+  type Tick = {pos: number; label: string}
+
+  let ticksX = useMemo((): Tick[] => {
+    let ticks: Tick[] = []
+    let preferredTickXSpacing = scaleViewToWorldX(scaleScreenToView(preferredTickSpacing))
+    let tickSpacing = roundToNearestMultipleOf(
+      preferredTickXSpacing,
+      10 ** Math.floor(Math.log10(Math.abs(rangeX[0])) - 1),
+    )
+    const smallestTick = Math.floor(rangeX[1] / tickSpacing)
+    const largestTick = Math.ceil(-rangeX[0] / tickSpacing)
+    for (let i = smallestTick; i < largestTick; i++) {
+      let worldPos = i * -tickSpacing
+      ticks.push({
+        pos: viewToScreen(worldToView([worldPos, 0]))[0] - svgPos[0],
+        label: String(-worldPos),
+      })
+    }
+    return ticks
+  }, [rangeX, scaleScreenToView, scaleViewToWorldX, svgPos, viewToScreen, worldToView])
+
+  const ticksY = useMemo((): Tick[] => {
+    let ticks: Tick[] = []
+    let preferredTickYSpacing = scaleViewToWorldY(scaleScreenToView(-preferredTickSpacing))
+    let tickSpacing = roundToNearestMultipleOf(preferredTickYSpacing, 10 ** Math.floor(Math.log10(rangeY[1]) - 1))
+    const smallestTick = Math.ceil(rangeY[0] / tickSpacing)
+    const largestTick = Math.floor(rangeY[1] / tickSpacing)
+    for (let i = smallestTick; i < largestTick; i++) {
+      let worldPos = i * tickSpacing
+      ticks.push({
+        pos: viewToScreen(worldToView([0, worldPos]))[1] - svgPos[1],
+        label: abbreviateNumber(worldPos / 1000),
+      })
+    }
+    return ticks
+  }, [rangeY, scaleScreenToView, scaleViewToWorldY, svgPos, viewToScreen, worldToView])
 
   return (
-    <div className="bg-olive-1 dark:bg-olive-3 rounded-lg light:shadow-[0px_0px_20px_0px_var(--olive-5)] p-4 grid grid-cols-[auto_1fr] grid-rows-[1fr_auto]">
+    <div className="bg-olive-1 dark:bg-olive-3 rounded-lg light:shadow-[0px_0px_20px_0px_var(--olive-5)] p-4 grid grid-cols-[2rem_1fr] grid-rows-[1fr_1.5rem]">
+      {/* Y axis */}
       <div className="relative">
-        <div className="h-full w-1 bg-olive-5" />
-        {/* {yTicks.map((tick) => (
-          <div
-            key={tick}
-            className="w-4 h-1 bg-olive-5 absolute left-0 top-0"
-            style={{transform: `translateY(${tick}px)`}}
-          />
-        ))} */}
+        {/* Axis */}
+        <div className="absolute top-0 right-0 h-full w-0.5 bg-olive-6" />
+
+        {/* Tick marks */}
+        {ticksY.map(({pos, label}) => (
+          <div key={pos} className="absolute left-0 top-0 h-0 w-8" style={{transform: `translateY(${pos}px)`}}>
+            <div className="absolute w-full transform -translate-y-1/2 flex justify-end items-center gap-2">
+              <span className="text-xs text-olive-9">{label}</span>
+              <div className="basis-2 flex-shrink-0 h-0.5 bg-olive-6" />
+            </div>
+          </div>
+        ))}
       </div>
       <div className="flex flex-col">
         <svg
@@ -180,7 +231,21 @@ const Overview: FC = () => {
         </svg>
       </div>
       <div />
-      <div>x</div>
+      {/* X axis */}
+      <div className="relative">
+        {/* Axis */}
+        <div className="absolute top-0 right-0 w-full h-0.5 bg-olive-6" />
+
+        {/* Tick marks */}
+        {ticksX.map(({pos, label}) => (
+          <div key={pos} className="absolute left-0 top-0 h-8 w-0" style={{transform: `translateX(${pos}px)`}}>
+            <div className="absolute w-full transform -translate-x-1/2 flex flex-col items-center gap-2">
+              <div className="basis-2 flex-shrink-0 w-0.5 bg-olive-6" />
+              <span className="text-xs text-olive-9">{label}</span>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
