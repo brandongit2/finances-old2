@@ -5,8 +5,6 @@ import {useLoaderData} from "remix"
 import type {Transaction} from "@prisma/client"
 import type {FC} from "react"
 
-import {avg} from "~/util/math"
-
 type Vector = [number, number]
 
 // Utility functions
@@ -38,16 +36,11 @@ const Overview: FC = () => {
 
   // Arrange the transactions into points
   const today = useMemo(() => dayjs(), [])
-  const _points = useMemo(
+  const points = useMemo<Vector[]>(
     () =>
       transactions.map((transaction) => [dayjs(transaction.timestamp).diff(today, `day`), transaction.balanceAfter]),
     [today, transactions],
   )
-
-  const dataRange = useMemo<[number, number]>(() => {
-    const balances = transactions.map((transaction) => transaction.balanceAfter)
-    return [0, Math.max(...balances)]
-  }, [transactions])
 
   // Data about the SVG
   const [svgPos, setSvgPos] = useState<[number, number]>([0, 0])
@@ -55,18 +48,22 @@ const Overview: FC = () => {
   const aspectRatio = svgDims[0] / svgDims[1]
 
   // Data about where we are on the graph
-  const [rangeX, setRangeX] = useState<[number, number]>([-14, 0])
-  const [rangeY, setRangeY] = useState<[number, number]>([0, dataRange[1]])
+  const [rangeX, setRangeX] = useState<[number, number]>([-300, 0])
+  const rangeY: [number, number] = useMemo(() => {
+    const balances = points.filter((point) => point[0] > rangeX[0] && point[0] < rangeX[1]).map((point) => point[1])
+    return [0, Math.max(...balances)]
+  }, [points, rangeX])
   const mousePos = useRef<Vector | null>(null)
 
-  // Transformation functions
+  // Transformation functions.
+  // "Screen" coordinates use the top-left of the screen as the origin. +Y is down, +X is right.
+  // "View" coordinates use the bottom-left of the SVG as the origin. +Y is down, +X is right.
+  // "World" coordinates use an arbitrary (0, 0) as the origin. +Y is up, +X is right.
   const screenToView = useCallback(
     (vector: Vector): Vector => {
       let result: Vector = [...vector]
       result = subtract(result, svgPos)
       result = scale(result, 1 / svgDims[1])
-      result = scale(result, 1, -1)
-      result = add(result, [0, 1])
       return result
     },
     [svgPos, svgDims],
@@ -75,6 +72,8 @@ const Overview: FC = () => {
   const viewToWorld = useCallback(
     (vector: Vector): Vector => {
       let result: Vector = [...vector]
+      result = scale(result, 1, -1)
+      result = add(result, [0, 1])
       result = scale(result, (rangeX[1] - rangeX[0]) / aspectRatio, rangeY[1] - rangeY[0])
       result = add(result, [rangeX[0], rangeY[0]])
       return result
@@ -87,6 +86,8 @@ const Overview: FC = () => {
       let result: Vector = [...vector]
       result = subtract(result, [rangeX[0], rangeY[0]])
       result = scale(result, aspectRatio / (rangeX[1] - rangeX[0]), 1 / (rangeY[1] - rangeY[0]))
+      result = subtract(result, [0, 1])
+      result = scale(result, 1, -1)
       return result
     },
     [rangeX, rangeY, aspectRatio],
@@ -95,8 +96,6 @@ const Overview: FC = () => {
   const viewToScreen = useCallback(
     (vector: Vector): Vector => {
       let result: Vector = [...vector]
-      result = subtract(result, [0, 1])
-      result = scale(result, 1, -1)
       result = scale(result, svgDims[1])
       result = add(result, svgPos)
       return result
@@ -113,8 +112,6 @@ const Overview: FC = () => {
     window.addEventListener(`mousemove`, onMouseMove)
     return () => void window.removeEventListener(`mousemove`, onMouseMove)
   }, [screenToView, viewToWorld])
-
-  const points = _points.map(([x, y]) => worldToView([x, y]))
 
   const svgRef = useCallback((node: SVGSVGElement | null) => {
     if (!node) return
@@ -174,8 +171,11 @@ const Overview: FC = () => {
           ref={svgRef}
         >
           <polyline
-            points={points.map(([day, balance]) => `${day},${balance}`).join(` `)}
-            className="stroke-grass-9 stroke-[0.5%] fill-[none] [stroke-linejoin:round]"
+            points={points
+              .map((point) => worldToView(point))
+              .map(([day, balance]) => `${day},${balance}`)
+              .join(` `)}
+            className="stroke-grass-9 stroke-[0.5%] fill-[none] [stroke-linejoin:round] [stroke-linecap:round]"
           />
         </svg>
       </div>
