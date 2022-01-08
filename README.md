@@ -41,9 +41,9 @@ brew install supabase/tap/supabase
 
    1. Make a copy of .env.example:
 
-   ```bash
-   cp .env.example .env
-   ```
+      ```bash
+      cp .env.example .env
+      ```
 
    1. Populate the new .env file with values of your own.
 
