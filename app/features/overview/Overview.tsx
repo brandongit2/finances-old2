@@ -133,29 +133,64 @@ const Overview: FC = () => {
     }
 
     window.addEventListener(`mousemove`, onMouseMove)
-    return () => void window.removeEventListener(`mousemove`, onMouseMove)
+    window.addEventListener(`wheel`, onMouseMove)
+    return () => {
+      window.removeEventListener(`mousemove`, onMouseMove)
+      window.removeEventListener(`wheel`, onMouseMove)
+    }
   }, [screenToView, viewToWorld])
+
+  // Pan/zoom functions
+  const pan = (amount: number) => {
+    setRangeX((rangeX) => {
+      let result: [number, number] = [...rangeX]
+      result = add(result, [amount, amount])
+      if (result[1] > 0) result = subtract(result, [result[1], result[1]])
+      return result
+    })
+  }
+
+  const zoom = (factor: number) => {
+    setRangeX((rangeX) => {
+      let result: [number, number] = [...rangeX]
+      if (!mousePos.current) return result
+      result = scaleAbout(result, [mousePos.current[0], mousePos.current[0]], factor)
+      if (result[1] > 0) result = subtract(result, [result[1], result[1]])
+      return result
+    })
+  }
 
   // Handle click and drag to pan
   const onPointerMove: React.PointerEventHandler<SVGSVGElement> = (evt) => {
     if (evt.buttons === 0) return
     let mouseMovement = scaleViewToWorldX(scaleScreenToView(-evt.movementX))
-    setRangeX((rangeX) => {
-      if (rangeX[1] + mouseMovement > 0) return rangeX
-      return [rangeX[0] + mouseMovement, rangeX[1] + mouseMovement]
-    })
+    pan(mouseMovement)
   }
 
-  // Handle scroll to zoom
+  // Handle scroll to zoom and also trackpad events
   const onWheel: React.WheelEventHandler<SVGSVGElement> = (evt) => {
-    setRangeX((rangeX) => {
-      let result: [number, number] = [...rangeX]
-      if (!mousePos.current) return result
-      result = scaleAbout(result, [mousePos.current[0], mousePos.current[0]], evt.deltaY / 400 + 1)
-      if (result[1] > 0) result = subtract(result, [result[1], result[1]])
-      return result
-    })
+    if (Math.abs(evt.deltaY) > Math.abs(evt.deltaX)) {
+      let factor = evt.ctrlKey ? 100 : 400
+      zoom(evt.deltaY / factor + 1)
+    } else {
+      pan(evt.deltaX)
+    }
   }
+
+  useEffect(() => {
+    const onWheel = (evt: WheelEvent) => void evt.preventDefault()
+    let onWheelOptions: AddEventListenerOptions = {passive: false}
+    document.addEventListener(`wheel`, onWheel, onWheelOptions)
+
+    const onTouchStart = (evt: TouchEvent) => void evt.preventDefault()
+    let onTouchStartOptions: AddEventListenerOptions = {passive: true}
+    document.addEventListener(`touchstart`, onTouchStart, onTouchStartOptions)
+
+    return () => {
+      document.removeEventListener(`wheel`, onWheel, onWheelOptions)
+      document.removeEventListener(`touchstart`, onTouchStart, onTouchStartOptions)
+    }
+  }, [])
 
   const preferredTickSpacing = 64 // in pixels
   type Tick = {pos: number; label: string}

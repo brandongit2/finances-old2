@@ -18,7 +18,9 @@ export function links() {
 }
 
 export const meta: MetaFunction = () => {
-  return {title: `Finances`}
+  return {
+    title: `Finances`,
+  }
 }
 
 export default function App() {

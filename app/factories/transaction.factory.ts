@@ -10,7 +10,7 @@ export function buildTransactions(): Prisma.TransactionCreateWithoutUserInput[] 
   const transactions: Prisma.TransactionCreateWithoutUserInput[] = []
 
   const avgTransactionsPerDay = 3
-  const numDaysToGenerate = 500
+  const numDaysToGenerate = 2000
 
   let totalBalance = 50000_00
   for (let i = 0; i < numDaysToGenerate; i++) {

@@ -21,7 +21,7 @@
     "build": "yarn build:css && remix build",
     "build:css": "tailwindcss -o ./app/tailwind.css",
     "lint": "prettier --ignore-path .gitignore --write . --loglevel warn && eslint --ignore-path .gitignore --fix . && tsc",
-    "seed": " && node ./prisma/seed-bundle/index.js"
+    "reset-db": "yarn run prisma db push --force-reset --accept-data-loss && yarn run prisma db seed"
   },
   "prisma": {
     "seed": "node --require esbuild-register ./prisma/seed.ts"
