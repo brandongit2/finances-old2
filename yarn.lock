@@ -1530,7 +1530,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@netlify/config@npm:^17.0.0, @netlify/config@npm:^17.0.2":
+"@netlify/config@npm:^17.0.0":
   version: 17.0.2
   resolution: "@netlify/config@npm:17.0.2"
   dependencies:
@@ -1562,6 +1562,41 @@ __metadata:
   bin:
     netlify-config: src/bin/main.js
   checksum: 1e20ae9450110b8907f4dd0ed032b4633fe38c39d50c70492288f9bf20aa5e6df997613d0dd7aa015c9b20e4cf50948f764d7f8b042a61a9941d4c6476bbe46d
+  languageName: node
+  linkType: hard
+
+"@netlify/config@npm:^17.0.3":
+  version: 17.0.3
+  resolution: "@netlify/config@npm:17.0.3"
+  dependencies:
+    chalk: ^4.1.2
+    cron-parser: ^4.1.0
+    deepmerge: ^4.2.2
+    dot-prop: ^5.3.0
+    execa: ^5.1.1
+    fast-safe-stringify: ^2.0.7
+    figures: ^3.2.0
+    filter-obj: ^2.0.1
+    find-up: ^5.0.0
+    indent-string: ^4.0.0
+    is-plain-obj: ^3.0.0
+    js-yaml: ^4.0.0
+    make-dir: ^3.1.0
+    map-obj: ^4.0.0
+    netlify: ^10.1.1
+    netlify-headers-parser: ^6.0.0
+    netlify-redirect-parser: ^13.0.0
+    omit.js: ^2.0.2
+    p-locate: ^5.0.0
+    path-exists: ^4.0.0
+    path-type: ^4.0.0
+    toml: ^3.0.0
+    tomlify-j0.4: ^3.0.0
+    validate-npm-package-name: ^3.0.0
+    yargs: ^15.3.0
+  bin:
+    netlify-config: src/bin/main.js
+  checksum: 83a381867cc11620152999c57d700ec0514d8a5837a18807cf32270df2400950ead3e4b76a03f00ff3ab4c3c78f73e079dd63aa0bacc6ed9a1e54b3278780453
   languageName: node
   linkType: hard
 
@@ -1783,6 +1818,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@netlify/open-api@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "@netlify/open-api@npm:2.8.0"
+  checksum: c814c530b13a14c96425438f3c74a73fcd436cd87809bd68245de0d6b31cd09546c5cfe1497e53af95691cd7bb12165093ceb852fe42e33ecaa6f6c32b98e98c
+  languageName: node
+  linkType: hard
+
 "@netlify/plugin-edge-handlers@npm:^3.0.0":
   version: 3.0.0
   resolution: "@netlify/plugin-edge-handlers@npm:3.0.0"
@@ -1876,50 +1918,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@netlify/zip-it-and-ship-it@npm:5.3.1":
-  version: 5.3.1
-  resolution: "@netlify/zip-it-and-ship-it@npm:5.3.1"
-  dependencies:
-    "@babel/parser": ^7.15.7
-    "@netlify/esbuild": ^0.13.6
-    "@vercel/nft": ^0.17.0
-    archiver: ^5.3.0
-    common-path-prefix: ^3.0.0
-    cp-file: ^9.0.0
-    del: ^6.0.0
-    elf-cam: ^0.1.1
-    end-of-stream: ^1.4.4
-    es-module-lexer: ^0.9.0
-    execa: ^5.0.0
-    filter-obj: ^2.0.1
-    find-up: ^5.0.0
-    glob: ^7.1.6
-    is-builtin-module: ^3.1.0
-    junk: ^3.1.0
-    locate-path: ^6.0.0
-    make-dir: ^3.1.0
-    merge-options: ^3.0.4
-    minimatch: ^3.0.4
-    p-map: ^4.0.0
-    path-exists: ^4.0.0
-    pkg-dir: ^5.0.0
-    precinct: ^8.2.0
-    read-package-json-fast: ^2.0.2
-    require-package-name: ^2.0.1
-    resolve: ^2.0.0-next.1
-    semver: ^7.0.0
-    tmp-promise: ^3.0.2
-    toml: ^3.0.0
-    typescript: ^4.4.3
-    unixify: ^1.0.0
-    yargs: ^16.0.0
-  bin:
-    zip-it-and-ship-it: dist/bin.js
-  checksum: 0072a792c4a8cb9006b63f8b5c8ff647199ea95ad00cc434851c613f07f3461d87356fd8c314d08fc5ac3cc7eb14bf04a51738e1660a5a8337d67ed86b32dc6f
-  languageName: node
-  linkType: hard
-
-"@netlify/zip-it-and-ship-it@npm:^5.4.0":
+"@netlify/zip-it-and-ship-it@npm:5.4.0, @netlify/zip-it-and-ship-it@npm:^5.4.0":
   version: 5.4.0
   resolution: "@netlify/zip-it-and-ship-it@npm:5.4.0"
   dependencies:
@@ -3314,10 +3313,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:17.0.7":
-  version: 17.0.7
-  resolution: "@types/node@npm:17.0.7"
-  checksum: 3cb3024f8c12152f609fabadd66d55e1b02f2a1fd61ae859755d493f01f0e15e66f71784e2f1dac57133415083a426effd12210eb4ed4f2a35d190836eb789ae
+"@types/node@npm:17.0.8":
+  version: 17.0.8
+  resolution: "@types/node@npm:17.0.8"
+  checksum: f4cadeb9e602027520abc88c77142697e33cf6ac98bb02f8b595a398603cbd33df1f94d01c055c9f13cde0c8eaafc5e396ca72645458d42b4318b845bc7f1d0f
   languageName: node
   linkType: hard
 
@@ -3401,10 +3400,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/tailwindcss@npm:3.0.1":
-  version: 3.0.1
-  resolution: "@types/tailwindcss@npm:3.0.1"
-  checksum: 79a2cce1361c93e218d163c00a8c97c265b0d81d23c612f5aa1ca93c93fcbfabe0abc681d2d5bcfcc913f24c17f1efd4ae25ce5f60e6a5af6c7763ab4111f514
+"@types/tailwindcss@npm:3.0.2":
+  version: 3.0.2
+  resolution: "@types/tailwindcss@npm:3.0.2"
+  checksum: 2e5be8f465ee57407bda3b49d64bda3a801ef946a815ea9affbae506517968fc584996a17a3d9c8fb712e73e855e91375ad11ca17d0e099f6bab0013c246dce3
   languageName: node
   linkType: hard
 
@@ -4339,12 +4338,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"better-opn@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "better-opn@npm:2.1.1"
+"better-opn@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "better-opn@npm:3.0.1"
   dependencies:
-    open: ^7.0.3
-  checksum: 3d1a945d125cbbc6e6a841bef7540435d77d5aa61fc4d345896f5f0b3780fcf9c7145373deaedf62d674a427b187ae973f4410884f9fea0c15f7f01f9dc339c7
+    open: ^8.0.4
+  checksum: 36479cc3ec9320817be68af75cc69ccb71bc9058820a2a0988c57ef38f1a4bf2199fcbf28e7f8d8dce937c411f648f2ff5cca9e98159cb0dd444843068bd3e96
   languageName: node
   linkType: hard
 
@@ -5927,6 +5926,13 @@ __metadata:
   version: 2.0.1
   resolution: "defer-to-connect@npm:2.0.1"
   checksum: 8a9b50d2f25446c0bfefb55a48e90afd58f85b21bcf78e9207cd7b804354f6409032a1705c2491686e202e64fc05f147aa5aa45f9aa82627563f045937f5791b
+  languageName: node
+  linkType: hard
+
+"define-lazy-prop@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "define-lazy-prop@npm:2.0.0"
+  checksum: 0115fdb065e0490918ba271d7339c42453d209d4cb619dfe635870d906731eff3e1ade8028bb461ea27ce8264ec5e22c6980612d332895977e89c1bbc80fcee2
   languageName: node
   linkType: hard
 
@@ -7618,10 +7624,10 @@ __metadata:
     "@types/bcrypt": 5.0.0
     "@types/cuid": 2.0.1
     "@types/faker": 5.5.9
-    "@types/node": 17.0.7
+    "@types/node": 17.0.8
     "@types/react": 17.0.38
     "@types/react-dom": 17.0.11
-    "@types/tailwindcss": 3.0.1
+    "@types/tailwindcss": 3.0.2
     "@typescript-eslint/eslint-plugin": 5.9.0
     "@typescript-eslint/parser": 5.9.0
     bcrypt: 5.0.1
@@ -7639,16 +7645,16 @@ __metadata:
     eslint-plugin-react: 7.28.0
     eslint-plugin-react-hooks: 4.3.0
     faker: 5.5.3
-    netlify-cli: 8.6.2
+    netlify-cli: 8.6.15
     prettier: 2.5.1
     prettier-plugin-prisma: 3.7.0
     prisma: 3.7.0
     react: 17.0.2
     react-dom: 17.0.2
     remix: 1.1.1
-    tailwindcss: 3.0.9
+    tailwindcss: 3.0.12
     tiny-invariant: 1.2.0
-    type-fest: 2.8.0
+    type-fest: 2.9.0
     typescript: 4.5.4
     yup: 0.32.11
   languageName: unknown
@@ -7978,13 +7984,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-caller-file@npm:^1.0.2":
-  version: 1.0.3
-  resolution: "get-caller-file@npm:1.0.3"
-  checksum: 2b90a7f848896abcebcdc0acc627a435bcf05b9cd280599bc980ebfcdc222416c3df12c24c4845f69adc4346728e8966f70b758f9369f3534182791dfbc25c05
-  languageName: node
-  linkType: hard
-
 "get-caller-file@npm:^2.0.1, get-caller-file@npm:^2.0.5":
   version: 2.0.5
   resolution: "get-caller-file@npm:2.0.5"
@@ -8076,18 +8075,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gh-release-fetch@npm:^2.0.0":
-  version: 2.0.4
-  resolution: "gh-release-fetch@npm:2.0.4"
+"gh-release-fetch@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "gh-release-fetch@npm:3.0.0"
   dependencies:
     "@types/download": ^8.0.0
     "@types/node-fetch": ^2.1.6
     "@types/semver": ^7.0.0
     download: ^8.0.0
-    make-dir: ^3.1.0
     node-fetch: ^2.3.0
     semver: ^7.0.0
-  checksum: 48337558396255ae855b701b588d98efb6a9848336fe5d0a8db5b057d3e8e896cc3b3e2f793540a725998ab5a5b08c502b5125db13b96d8c847b35f0547a42d5
+  checksum: a59f63261624efbc2a3925222037f93d9ff8cfd02e076f29f9563497326ebfa1ccb6b1a9f7927dd85f47c185602b551b9761f0752fdb6c5ac4acc9f8ce1efdba
   languageName: node
   linkType: hard
 
@@ -8604,16 +8602,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"http-proxy-middleware@npm:^1.0.0":
-  version: 1.3.1
-  resolution: "http-proxy-middleware@npm:1.3.1"
+"http-proxy-middleware@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "http-proxy-middleware@npm:2.0.1"
   dependencies:
     "@types/http-proxy": ^1.17.5
     http-proxy: ^1.18.1
     is-glob: ^4.0.1
     is-plain-obj: ^3.0.0
     micromatch: ^4.0.2
-  checksum: c6f0fe6d5aa58f3757084f1fad8109e7384fdea1b0a5c62f58ac767c42f367a18d3819bed8cbf8b5183f17e3e14fad04322f179c569629004da5fbec9b81a88a
+  checksum: 0de65bc6644b6efae5d26cd3bec071ceaeb92f26856ffee5ecdde9c702ea1435936e7dfb09da2ac0883eada80fdc993e9925902fc10bf6625565d6365f8cb30f
   languageName: node
   linkType: hard
 
@@ -9100,7 +9098,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-docker@npm:^2.0.0":
+"is-docker@npm:^2.0.0, is-docker@npm:^2.1.1":
   version: 2.2.1
   resolution: "is-docker@npm:2.2.1"
   bin:
@@ -9499,7 +9497,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-wsl@npm:^2.1.1, is-wsl@npm:^2.2.0":
+"is-wsl@npm:^2.2.0":
   version: 2.2.0
   resolution: "is-wsl@npm:2.2.0"
   dependencies:
@@ -11208,16 +11206,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mock-require@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "mock-require@npm:3.0.3"
-  dependencies:
-    get-caller-file: ^1.0.2
-    normalize-path: ^2.1.1
-  checksum: 6355c0bd9d7acb5247155142928b0154ace2913264b42d9a611a85d469ed11048f405efe432ffc627a57efb87ec359589a7419bf680b4fd248612311deb031bd
-  languageName: node
-  linkType: hard
-
 "module-definition@npm:^3.3.1":
   version: 3.3.1
   resolution: "module-definition@npm:3.3.1"
@@ -11377,25 +11365,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cli@npm:8.6.2":
-  version: 8.6.2
-  resolution: "netlify-cli@npm:8.6.2"
+"netlify-cli@npm:8.6.15":
+  version: 8.6.15
+  resolution: "netlify-cli@npm:8.6.15"
   dependencies:
     "@netlify/build": ^26.1.0
-    "@netlify/config": ^17.0.2
+    "@netlify/config": ^17.0.3
     "@netlify/framework-info": ^7.0.0
     "@netlify/local-functions-proxy": ^1.1.1
     "@netlify/plugin-edge-handlers": ^3.0.0
     "@netlify/plugins-list": ^6.2.0
     "@netlify/routing-local-proxy": ^0.34.1
-    "@netlify/zip-it-and-ship-it": 5.3.1
+    "@netlify/zip-it-and-ship-it": 5.4.0
     "@octokit/rest": ^18.0.0
     "@sindresorhus/slugify": ^1.1.0
     ansi-escapes: ^5.0.0
     ansi-styles: ^5.0.0
     ascii-table: 0.0.9
     backoff: ^2.5.0
-    better-opn: ^2.1.1
+    better-opn: ^3.0.0
     boxen: ^5.0.0
     chalk: ^4.0.0
     chokidar: ^3.0.2
@@ -11417,20 +11405,19 @@ __metadata:
     execa: ^5.0.0
     express: ^4.17.1
     express-logging: ^1.1.1
-    filter-obj: ^2.0.1
     find-up: ^5.0.0
     flush-write-stream: ^2.0.0
     folder-walker: ^3.2.0
     from2-array: ^0.0.4
     fuzzy: ^0.1.3
     get-port: ^5.1.0
-    gh-release-fetch: ^2.0.0
+    gh-release-fetch: ^3.0.0
     git-repo-info: ^2.1.0
     gitconfiglocal: ^2.1.0
     hasbin: ^1.2.3
     hasha: ^5.2.2
     http-proxy: ^1.18.0
-    http-proxy-middleware: ^1.0.0
+    http-proxy-middleware: ^2.0.0
     https-proxy-agent: ^5.0.0
     inquirer: ^6.5.1
     inquirer-autocomplete-prompt: ^1.0.1
@@ -11445,19 +11432,16 @@ __metadata:
     lodash: ^4.17.20
     log-symbols: ^4.0.0
     log-update: ^5.0.0
-    make-dir: ^3.0.0
     memoize-one: ^6.0.0
     minimist: ^1.2.5
-    mock-require: ^3.0.3
     multiparty: ^4.2.1
-    netlify: ^10.1.0
+    netlify: ^10.1.1
     netlify-headers-parser: ^6.0.0
     netlify-redirect-parser: ^13.0.0
     netlify-redirector: ^0.2.1
     node-fetch: ^2.6.0
     node-version-alias: ^1.0.1
     omit.js: ^2.0.2
-    open: ^7.0.0
     ora: ^5.0.0
     p-event: ^4.2.0
     p-filter: ^2.1.0
@@ -11466,14 +11450,11 @@ __metadata:
     parallel-transform: ^1.2.0
     parse-github-url: ^1.0.2
     parse-gitignore: ^1.0.1
-    path-exists: ^4.0.0
     path-key: ^3.1.1
-    path-type: ^4.0.0
     prettyjson: ^1.2.1
     pump: ^3.0.0
     raw-body: ^2.4.1
     read-pkg-up: ^7.0.1
-    resolve: ^1.12.0
     semver: ^7.3.5
     source-map-support: ^0.5.19
     static-server: ^2.2.1
@@ -11494,7 +11475,7 @@ __metadata:
   bin:
     netlify: bin/run
     ntl: bin/run
-  checksum: c997fbe3a558b561ae9b026a1e12909c7f9b24bc2c34bf42d94a215d0570d15b799babceac6932a4cc9945da168b0f753cd4aeef2ecd4740b4d8ce1597613e00
+  checksum: e7271fefd5673afb82dcfc3551c73fbc5a6bad65d007bbfbbb04b4715b23701aa07f28dc70159343b5d5d1518ec23dbc2d900cf571e53e9cd132b3313092383b
   languageName: node
   linkType: hard
 
@@ -11542,6 +11523,21 @@ __metadata:
     p-wait-for: ^3.2.0
     qs: ^6.9.6
   checksum: 7d11c9d7cc87402d24bed9eac7b51764cf38671aff02f8c3c66925da9762acbfc9c9bd9ae2c86b8300cdcf479898c74d821af2a8ca1b87d739e58d9acc9c85ae
+  languageName: node
+  linkType: hard
+
+"netlify@npm:^10.1.1":
+  version: 10.1.1
+  resolution: "netlify@npm:10.1.1"
+  dependencies:
+    "@netlify/open-api": ^2.8.0
+    lodash.camelcase: ^4.3.0
+    micro-api-client: ^3.3.0
+    node-fetch: ^2.6.1
+    omit.js: ^2.0.2
+    p-wait-for: ^3.2.0
+    qs: ^6.9.6
+  checksum: f3b6370d028573b84233be1a94ece670799e2576bafb615c0282237818e419b71714395773ef24a343b188eee3531c552b4547e64c0816473550be7a3b0caf6a
   languageName: node
   linkType: hard
 
@@ -12017,13 +12013,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"open@npm:^7.0.0, open@npm:^7.0.3":
-  version: 7.4.2
-  resolution: "open@npm:7.4.2"
+"open@npm:^8.0.4":
+  version: 8.4.0
+  resolution: "open@npm:8.4.0"
   dependencies:
-    is-docker: ^2.0.0
-    is-wsl: ^2.1.1
-  checksum: 3333900ec0e420d64c23b831bc3467e57031461d843c801f569b2204a1acc3cd7b3ec3c7897afc9dde86491dfa289708eb92bba164093d8bd88fb2c231843c91
+    define-lazy-prop: ^2.0.0
+    is-docker: ^2.1.1
+    is-wsl: ^2.2.0
+  checksum: e9545bec64cdbf30a0c35c1bdc310344adf8428a117f7d8df3c0af0a0a24c513b304916a6d9b11db0190ff7225c2d578885080b761ed46a3d5f6f1eebb98b63c
   languageName: node
   linkType: hard
 
@@ -12598,13 +12595,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-js@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "postcss-js@npm:3.0.3"
+"postcss-js@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "postcss-js@npm:4.0.0"
   dependencies:
     camelcase-css: ^2.0.1
-    postcss: ^8.1.6
-  checksum: cc17f59f2b9bb22ed1cf9daab1f9944635b0713dce923ff7d9fd10b89393fc9aa1fab43a97f9a71295827fa32c9676d52661d7d6a693ecc0c41541ee928c781e
+  peerDependencies:
+    postcss: ^8.3.3
+  checksum: 14be8a58670b4c5d037d40f179240a4f736d53530db727e2635638fa296bc4bff18149ca860928398aace422e55d07c9f5729eeccd395340944985199cdc82a5
   languageName: node
   linkType: hard
 
@@ -12635,7 +12633,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-selector-parser@npm:^6.0.6, postcss-selector-parser@npm:^6.0.7":
+"postcss-selector-parser@npm:^6.0.6, postcss-selector-parser@npm:^6.0.8":
   version: 6.0.8
   resolution: "postcss-selector-parser@npm:6.0.8"
   dependencies:
@@ -12663,7 +12661,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.1.6, postcss@npm:^8.1.7":
+"postcss@npm:^8.1.7":
   version: 8.4.5
   resolution: "postcss@npm:8.4.5"
   dependencies:
@@ -13491,7 +13489,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@npm:^1.10.0, resolve@npm:^1.12.0, resolve@npm:^1.14.2, resolve@npm:^1.17.0, resolve@npm:^1.19.0, resolve@npm:^1.20.0":
+"resolve@npm:^1.10.0, resolve@npm:^1.14.2, resolve@npm:^1.17.0, resolve@npm:^1.19.0, resolve@npm:^1.20.0":
   version: 1.20.0
   resolution: "resolve@npm:1.20.0"
   dependencies:
@@ -13511,7 +13509,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.12.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.17.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.19.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>":
+"resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.17.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.19.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>":
   version: 1.20.0
   resolution: "resolve@patch:resolve@npm%3A1.20.0#~builtin<compat/resolve>::version=1.20.0&hash=07638b"
   dependencies:
@@ -14663,9 +14661,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:3.0.9":
-  version: 3.0.9
-  resolution: "tailwindcss@npm:3.0.9"
+"tailwindcss@npm:3.0.12":
+  version: 3.0.12
+  resolution: "tailwindcss@npm:3.0.12"
   dependencies:
     arg: ^5.0.1
     chalk: ^4.1.2
@@ -14680,10 +14678,10 @@ __metadata:
     is-glob: ^4.0.3
     normalize-path: ^3.0.0
     object-hash: ^2.2.0
-    postcss-js: ^3.0.3
+    postcss-js: ^4.0.0
     postcss-load-config: ^3.1.0
     postcss-nested: 5.0.6
-    postcss-selector-parser: ^6.0.7
+    postcss-selector-parser: ^6.0.8
     postcss-value-parser: ^4.2.0
     quick-lru: ^5.1.1
     resolve: ^1.20.0
@@ -14693,7 +14691,7 @@ __metadata:
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: d3936a3aaea47bd0d105b6b62422f50e5351132f0de9d4628957a78a96f7de4165979c25673f52b8d235e96d53ca806a6969e20a9397a660eb4f1402bb63d5a1
+  checksum: d7de0458419ca50409f295831926cf76d2be1385894781c185b8200d3c568b10c7af2c27460582e47d8d4f89eacc7808f67027c1e8bc3820ac285d9497b675bb
   languageName: node
   linkType: hard
 
@@ -15141,10 +15139,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-fest@npm:2.8.0":
-  version: 2.8.0
-  resolution: "type-fest@npm:2.8.0"
-  checksum: 9f5afbe9d2ec8daeae4b9002ea320eac78487bef71f3d6937810ac6066cdaeaeec2dd1c4bb785edd12fd8b73412ab6beced2d81c5edd113e6c6bcb76bbe1c5bf
+"type-fest@npm:2.9.0":
+  version: 2.9.0
+  resolution: "type-fest@npm:2.9.0"
+  checksum: 497b9b367536fe69a9d4258fb5afda04755de34278d2d949fa04325e6cd586b31643dd94ab3085f22088f054f39f44f4bbabfcaf789a00f508b1aed8ec43cd73
   languageName: node
   linkType: hard
 
