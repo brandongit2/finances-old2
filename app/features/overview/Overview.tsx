@@ -69,7 +69,7 @@ const Overview: FC = () => {
   }, [points])
 
   // Data about where we are on the graph
-  const [rangeX, setRangeX] = useState<[number, number]>([-300, 0])
+  const [rangeX, setRangeX] = useState<[number, number]>([-365, 0])
   const rangeY: [number, number] = useMemo(() => {
     const balances = points.filter((point) => point[0] > rangeX[0] && point[0] < rangeX[1]).map((point) => point[1])
     return [Math.min(...balances), Math.max(...balances)]

@@ -38,6 +38,9 @@ export const action: ActionFunction = async ({request}) => {
 
       return {}
     }
+    default: {
+      throw new Response(undefined, {status: 405})
+    }
   }
 }
 

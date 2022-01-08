@@ -1,4 +1,4 @@
-import {Form} from "remix"
+import {useFetcher} from "remix"
 import * as yup from "yup"
 
 import type {FC} from "react"
@@ -27,7 +27,9 @@ export const signInSchema = yup.object().shape<YupShape<TSignIn>>({
 })
 
 const SignInForm: FC = () => {
-  const {validate, errors} = useValidation<TSignIn>(signInSchema)
+  const fetcher = useFetcher()
+
+  const {validate, errors} = useValidation<TSignIn>(signInSchema, fetcher.data || null)
 
   return (
     <Card className="flex flex-col gap-4 max-w-md force-light">
@@ -41,7 +43,13 @@ const SignInForm: FC = () => {
 
       <Hr />
 
-      <Form method="post" replace className="grid grid-cols-[auto_1fr] items-center gap-x-4" noValidate>
+      <fetcher.Form
+        method="post"
+        action="/sign-in"
+        replace
+        className="grid grid-cols-[auto_1fr] items-center gap-x-4"
+        noValidate
+      >
         <FormError messages={errors.root} className="col-span-2" marginBottom />
 
         <Label className="text-right">Email</Label>
@@ -59,7 +67,7 @@ const SignInForm: FC = () => {
         <Button type="submit" filled className="col-start-2 mx-auto">
           Submit
         </Button>
-      </Form>
+      </fetcher.Form>
     </Card>
   )
 }
