@@ -47,10 +47,10 @@ const Transactions: FC = () => {
   }, [])
 
   const itemHeight = 64
-  let limitTop = Math.max(Math.floor(scrollPos / itemHeight) - 5, 0)
-  let limitBottom = Math.min(Math.ceil(limitTop + 10 + containerHeight / itemHeight), _transactions.length)
+  const itemPadding = 10 // No. extra items to render outside the visible area
+  let limitTop = Math.max(Math.floor(scrollPos / itemHeight) - itemPadding, 0)
+  let limitBottom = Math.min(Math.ceil(limitTop + itemPadding * 2 + containerHeight / itemHeight), _transactions.length)
   let itemsToRender = _transactions.map((transaction) => transaction.id).slice(limitTop, limitBottom)
-  console.log(limitTop, limitBottom)
 
   return (
     <ScrollContainer

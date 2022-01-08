@@ -9,10 +9,10 @@ invariant(COOKIE_SECRET, `Environment variable "COOKIE_SECRET" not found.`)
 const {getSession, commitSession, destroySession} = createSessionStorage({
   cookie: {
     name: `session`,
-    httpOnly: true,
-    sameSite: `lax`,
+    httpOnly: process.env.NODE_ENV === `production`,
+    sameSite: process.env.NODE_ENV === `production` ? `lax` : `none`,
     secrets: [COOKIE_SECRET],
-    secure: true,
+    secure: process.env.NODE_ENV === `production`,
   },
   async createData(data) {
     const string = JSON.stringify(data)
