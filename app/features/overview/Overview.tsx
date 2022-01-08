@@ -163,13 +163,12 @@ const Overview: FC = () => {
   let ticksX = useMemo((): Tick[] => {
     let ticks: Tick[] = []
     let preferredTickXSpacing = scaleViewToWorldX(scaleScreenToView(preferredTickSpacing))
-    let tickSpacing = roundToNearestMultipleOf(
-      preferredTickXSpacing,
-      10 ** Math.floor(Math.log10(Math.abs(rangeX[0])) - 1),
-    )
-    const smallestTick = Math.floor(rangeX[1] / tickSpacing)
-    const largestTick = Math.ceil(-rangeX[0] / tickSpacing)
-    for (let i = smallestTick; i < largestTick; i++) {
+    let interval = 10 ** Math.floor(Math.log10(Math.abs(rangeX[0])) - 1)
+    let tickSpacing = roundToNearestMultipleOf(preferredTickXSpacing, interval)
+    if (tickSpacing === 0) tickSpacing += interval
+    const smallestTick = Math.ceil(-rangeX[1] / tickSpacing)
+    const largestTick = Math.floor(-rangeX[0] / tickSpacing)
+    for (let i = smallestTick; i <= largestTick; i++) {
       let worldPos = i * -tickSpacing
       ticks.push({
         pos: viewToScreen(worldToView([worldPos, 0]))[0] - svgPos[0],
@@ -182,10 +181,12 @@ const Overview: FC = () => {
   const ticksY = useMemo((): Tick[] => {
     let ticks: Tick[] = []
     let preferredTickYSpacing = scaleViewToWorldY(scaleScreenToView(-preferredTickSpacing))
-    let tickSpacing = roundToNearestMultipleOf(preferredTickYSpacing, 10 ** Math.floor(Math.log10(rangeY[1]) - 1))
+    let interval = 10 ** Math.floor(Math.log10(rangeY[1]) - 1)
+    let tickSpacing = roundToNearestMultipleOf(preferredTickYSpacing, interval)
+    if (tickSpacing === 0) tickSpacing += interval
     const smallestTick = Math.ceil(rangeY[0] / tickSpacing)
     const largestTick = Math.floor(rangeY[1] / tickSpacing)
-    for (let i = smallestTick; i < largestTick; i++) {
+    for (let i = smallestTick; i <= largestTick; i++) {
       let worldPos = i * tickSpacing
       ticks.push({
         pos: viewToScreen(worldToView([0, worldPos]))[1] - svgPos[1],
