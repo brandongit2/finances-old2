@@ -1,7 +1,6 @@
 import * as ScrollArea from "@radix-ui/react-scroll-area"
 import clsx from "clsx"
-
-import type {FC} from "react"
+import {forwardRef} from "react"
 
 type ScrollContainerProps = {
   permanent?: boolean
@@ -10,18 +9,18 @@ type ScrollContainerProps = {
   orientation?: `vertical` | `horizontal` | `both`
 }
 
-const ScrollContainer: FC<ScrollContainerProps & Omit<React.ComponentProps<typeof ScrollArea.Root>, `asChild`>> = ({
-  permanent = false,
-  marginStart,
-  marginEnd,
-  orientation = `vertical`,
-  children,
-  className,
-  ...props
-}) => {
+const ScrollContainer = forwardRef<
+  HTMLDivElement,
+  ScrollContainerProps & Omit<React.ComponentProps<typeof ScrollArea.Root>, `asChild`>
+>(function ScrollContainer(
+  {permanent = false, marginStart, marginEnd, orientation = `vertical`, children, className, ...props},
+  ref,
+) {
   return (
     <ScrollArea.Root {...props} className={clsx(`overflow-hidden`, className)} type="scroll" scrollHideDelay={400}>
-      <ScrollArea.Viewport className="max-h-full w-full">{children}</ScrollArea.Viewport>
+      <ScrollArea.Viewport className="max-h-full w-full" ref={ref}>
+        {children}
+      </ScrollArea.Viewport>
 
       {(orientation === `vertical` || orientation === `both`) && (
         <ScrollArea.Scrollbar
@@ -62,6 +61,6 @@ const ScrollContainer: FC<ScrollContainerProps & Omit<React.ComponentProps<typeo
       )}
     </ScrollArea.Root>
   )
-}
+})
 
 export default ScrollContainer

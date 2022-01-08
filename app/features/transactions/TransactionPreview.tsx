@@ -43,7 +43,7 @@ const TransactionPreview: FC<TransactionPreviewProps> = ({transaction, expanded 
   return (
     <div
       className={clsx(
-        `px-4 py-2 rounded-md transition-colors hover:bg-olive-5 flex flex-col gap-4 cursor-pointer`,
+        `h-16 px-4 py-2 rounded-md transition-colors hover:bg-olive-5 flex flex-col gap-4 cursor-pointer`,
         expanded && `bg-olive-5`,
       )}
       onClick={() => (expanded ? onCollapse() : onExpand())}

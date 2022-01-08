@@ -150,7 +150,11 @@ const Overview: FC = () => {
     setRangeX((rangeX) => {
       let result: [number, number] = [...rangeX]
       result = add(result, [amount, amount])
+
+      // Right boundary
       if (result[1] > 0) result = subtract(result, [result[1], result[1]])
+
+      // Left boundary
       if (result[0] < dataRangeX[0]) result = add(result, [dataRangeX[0] - result[0], dataRangeX[0] - result[0]])
       return result
     })
@@ -161,9 +165,19 @@ const Overview: FC = () => {
       let result: [number, number] = [...rangeX]
       if (!mousePos.current) return result
       result = scaleAbout(result, [mousePos.current[0], mousePos.current[0]], factor)
+
+      // Limit zooming out
       if (Math.abs(result[1] - result[0]) > Math.abs(dataRangeX[1] - dataRangeX[0]))
         result = [dataRangeX[0], dataRangeX[1]]
+
+      // Limit zooming in
+      if (Math.abs(result[1] - result[0]) < 5)
+        result = scaleAbout(result, [mousePos.current[0], mousePos.current[0]], 5 / (result[1] - result[0]))
+
+      // Right boundary
       if (result[1] > 0) result = subtract(result, [result[1], result[1]])
+
+      // Left boundary
       if (result[0] < dataRangeX[0]) result = add(result, [dataRangeX[0] - result[0], dataRangeX[0] - result[0]])
       return result
     })
@@ -260,7 +274,7 @@ const Overview: FC = () => {
 
         {/* Tick marks */}
         {ticksY.map(({pos, label}) => (
-          <div key={pos} className="absolute left-0 top-0 h-0 w-12" style={{transform: `translateY(${pos}px)`}}>
+          <div key={label} className="absolute left-0 top-0 h-0 w-12" style={{transform: `translateY(${pos}px)`}}>
             <div className="absolute w-full transform -translate-y-1/2 flex justify-end items-center gap-2">
               <span className="text-xs text-olive-9">{label}</span>
               <div className="basis-2 flex-shrink-0 h-0.5 bg-olive-6" />
@@ -279,7 +293,7 @@ const Overview: FC = () => {
         >
           <polyline
             points={points
-              .filter((point) => point[0] >= rangeX[0] && point[0] <= rangeX[1])
+              .filter((point, i) => points[i - 1]?.[0] >= rangeX[0] - 1 && points[i + 1]?.[0] <= rangeX[1] + 1)
               .map((point) => worldToView(point))
               .map(([day, balance]) => `${day},${balance}`)
               .join(` `)}
@@ -298,7 +312,7 @@ const Overview: FC = () => {
 
         {/* Tick marks */}
         {ticksX.map(({pos, label}) => (
-          <div key={pos} className="absolute left-0 top-0 h-8 w-0" style={{transform: `translateX(${pos}px)`}}>
+          <div key={label} className="absolute left-0 top-0 h-8 w-0" style={{transform: `translateX(${pos}px)`}}>
             <div className="absolute w-full transform -translate-x-1/2 flex flex-col items-center gap-2">
               <div className="basis-2 flex-shrink-0 w-0.5 bg-olive-6" />
               <span className="text-xs text-olive-9">{label}</span>
