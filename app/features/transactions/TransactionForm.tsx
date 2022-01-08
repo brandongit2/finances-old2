@@ -2,9 +2,7 @@ import {useEffect} from "react"
 import {useFetcher} from "remix"
 import * as yup from "yup"
 
-import type {Transaction} from "@prisma/client"
 import type {FC} from "react"
-import type {MergeExclusive} from "type-fest"
 import type {YupShape} from "~/types/YupShape"
 
 import Button from "~/components/atoms/Button"
@@ -13,7 +11,6 @@ import TextInput from "~/components/atoms/TextInput"
 import FormError from "~/components/FormError"
 import {currencyAmt} from "~/util/regex"
 import {useValidation} from "~/util/useValidation"
-import {id} from "~/util/validation"
 
 const transactionShape = {
   name: yup.string().max(1000).required(),
@@ -43,15 +40,9 @@ export type TCreateTransaction = {
 }
 export const createTransactionSchema = yup.object().shape<YupShape<TCreateTransaction>>(transactionShape)
 
-export type TUpdateTransaction = TCreateTransaction & {id: string}
-export const updateTransactionSchema = yup.object().shape<YupShape<TUpdateTransaction>>({
-  ...transactionShape,
-  id: id.required(),
-})
+type TransactionFormProps = {onClose?: () => void}
 
-type TransactionFormProps = MergeExclusive<{transaction: Transaction}, {create: boolean}> & {onClose?: () => void}
-
-const TransactionForm: FC<TransactionFormProps> = ({transaction, create, onClose}) => {
+const TransactionForm: FC<TransactionFormProps> = ({onClose}) => {
   const fetcher = useFetcher()
   const {validate, errors} = useValidation<TCreateTransaction>(createTransactionSchema, fetcher.data)
 
@@ -59,17 +50,15 @@ const TransactionForm: FC<TransactionFormProps> = ({transaction, create, onClose
     if (fetcher.type === `done` && Object.keys(fetcher.data).length === 0) onClose?.()
   }, [fetcher.type, fetcher.data, onClose])
 
-  const transactionAmount = transaction ? (transaction.balanceAfter - transaction.balanceBefore) / 100 : undefined
-
   return (
     <fetcher.Form
-      method={create ? `post` : `patch`}
+      method="post"
       action="/transaction"
       autoComplete="off"
       className="p-4 rounded-md grid bg-olive-5 items-center"
     >
       {/* The transaction ID used for updating transactions */}
-      <input className="hidden" name="id" value={transaction?.id} />
+      <input className="hidden" name="id" />
 
       <FormError messages={errors.root} marginBottom />
 
@@ -77,7 +66,7 @@ const TransactionForm: FC<TransactionFormProps> = ({transaction, create, onClose
         <Label subdued className="text-right">
           Transaction name
         </Label>
-        <TextInput initialValue={transaction?.name} name="name" autoComplete="none" {...validate(`name`)} autoFocus />
+        <TextInput name="name" autoComplete="none" {...validate(`name`)} autoFocus />
         <FormError messages={errors.name} />
       </div>
 
@@ -89,7 +78,6 @@ const TransactionForm: FC<TransactionFormProps> = ({transaction, create, onClose
         </Label>
         <TextInput
           type="currency"
-          initialValue={transactionAmount || ``}
           name="amount"
           {...validate(`amount`)}
           onFocus={(e) => {

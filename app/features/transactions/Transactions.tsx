@@ -73,11 +73,11 @@ const Transactions: FC = () => {
         <div>
           {newTransactionFormKey && (
             <div className="ml-[5.5rem] m-4">
-              <TransactionForm key={newTransactionFormKey} create onClose={() => setNewTransactionFormKey(null)} />
+              <TransactionForm key={newTransactionFormKey} onClose={() => setNewTransactionFormKey(null)} />
             </div>
           )}
 
-          <div style={{height: `${itemHeight * _transactions.length}px`}}>
+          <div className="mt-2" style={{height: `${itemHeight * _transactions.length}px`}}>
             <div style={{height: `${itemHeight * limitTop}px`}} />
             {Object.entries(transactions).map(([day, dayTransactions]) => {
               const children = dayTransactions

@@ -7654,7 +7654,6 @@ __metadata:
     remix: 1.1.1
     tailwindcss: 3.0.12
     tiny-invariant: 1.2.0
-    type-fest: 2.9.0
     typescript: 4.5.4
     yup: 0.32.11
   languageName: unknown
@@ -15136,13 +15135,6 @@ __metadata:
   dependencies:
     prelude-ls: ~1.1.2
   checksum: dd3b1495642731bc0e1fc40abe5e977e0263005551ac83342ecb6f4f89551d106b368ec32ad3fb2da19b3bd7b2d1f64330da2ea9176d8ddbfe389fb286eb5124
-  languageName: node
-  linkType: hard
-
-"type-fest@npm:2.9.0":
-  version: 2.9.0
-  resolution: "type-fest@npm:2.9.0"
-  checksum: 497b9b367536fe69a9d4258fb5afda04755de34278d2d949fa04325e6cd586b31643dd94ab3085f22088f054f39f44f4bbabfcaf789a00f508b1aed8ec43cd73
   languageName: node
   linkType: hard
 

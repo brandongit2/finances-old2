@@ -1,3 +1,5 @@
+// All money balances are stored in cents.
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,6 +16,8 @@ model User {
   email        String @unique
   passwordHash String
 
+  currentBalance Int @default(0)
+
   transactions Transaction[]
 
   createdAt DateTime @default(now())
@@ -26,8 +30,8 @@ model SessionData {
 
 model Transaction {
   id            String   @id @default(cuid())
-  balanceBefore Int // In cents
-  balanceAfter  Int // In cents
+  balanceBefore Int
+  balanceAfter  Int
   name          String
   timestamp     DateTime @default(now())
 

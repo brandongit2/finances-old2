@@ -1,3 +1,4 @@
+import "core-js/features/array/at" // For Node 14 (on Netlify)
 import "core-js/proposals/string-replace-all" // For Node 14 (on Netlify)
 import {renderToString} from "react-dom/server"
 import {RemixServer} from "remix"
