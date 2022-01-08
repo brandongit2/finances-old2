@@ -182,7 +182,7 @@ const Overview: FC = () => {
       let factor = evt.ctrlKey ? 100 : 400
       zoom(evt.deltaY / factor + 1)
     } else {
-      pan(evt.deltaX)
+      pan(scaleViewToWorldX(scaleScreenToView(evt.deltaX)))
     }
   }
 
@@ -215,9 +215,9 @@ const Overview: FC = () => {
   let ticksX = useMemo((): Tick[] => {
     let ticks: Tick[] = []
     let preferredTickXSpacing = scaleViewToWorldX(scaleScreenToView(preferredTickSpacing))
-    let interval = 10 ** Math.floor(Math.log10(Math.abs(rangeX[0])) - 1)
+    let interval = 10 ** Math.floor(Math.log10(Math.abs(rangeX[0] - rangeX[1])) - 1)
     let tickSpacing = roundToNearestMultipleOf(preferredTickXSpacing, interval)
-    if (tickSpacing === 0) tickSpacing += interval
+    if (tickSpacing < 1) tickSpacing = 1
     const smallestTick = Math.ceil(-rangeX[1] / tickSpacing)
     const largestTick = Math.floor(-rangeX[0] / tickSpacing)
     for (let i = smallestTick; i <= largestTick; i++) {
@@ -233,7 +233,7 @@ const Overview: FC = () => {
   const ticksY = useMemo((): Tick[] => {
     let ticks: Tick[] = []
     let preferredTickYSpacing = scaleViewToWorldY(scaleScreenToView(-preferredTickSpacing))
-    let interval = 10 ** Math.floor(Math.log10(rangeY[1]) - 1)
+    let interval = 10 ** Math.floor(Math.log10(rangeY[1] - rangeY[0]) - 1)
     let tickSpacing = roundToNearestMultipleOf(preferredTickYSpacing, interval)
     if (tickSpacing === 0) tickSpacing += interval
     const smallestTick = Math.ceil(rangeY[0] / tickSpacing)
@@ -279,6 +279,7 @@ const Overview: FC = () => {
         >
           <polyline
             points={points
+              .filter((point) => point[0] >= rangeX[0] && point[0] <= rangeX[1])
               .map((point) => worldToView(point))
               .map(([day, balance]) => `${day},${balance}`)
               .join(` `)}
