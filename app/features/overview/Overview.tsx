@@ -187,19 +187,25 @@ const Overview: FC = () => {
   }
 
   // Disable zooming in or out
+  const overviewRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    const onWheel = (evt: WheelEvent) => void evt.preventDefault()
+    const onWheel = (evt: WheelEvent) => {
+      const overview = overviewRef.current
+      if (!overview) return
+
+      let boundingBox = overview.getBoundingClientRect()
+      if (
+        evt.clientX > boundingBox.left &&
+        evt.clientX < boundingBox.right &&
+        evt.clientY > boundingBox.top &&
+        evt.clientY < boundingBox.bottom
+      )
+        evt.preventDefault()
+    }
     let onWheelOptions: AddEventListenerOptions = {passive: false}
     document.addEventListener(`wheel`, onWheel, onWheelOptions)
 
-    const onTouchStart = (evt: TouchEvent) => void evt.preventDefault()
-    let onTouchStartOptions: AddEventListenerOptions = {passive: true}
-    document.addEventListener(`touchstart`, onTouchStart, onTouchStartOptions)
-
-    return () => {
-      document.removeEventListener(`wheel`, onWheel, onWheelOptions)
-      document.removeEventListener(`touchstart`, onTouchStart, onTouchStartOptions)
-    }
+    return () => void document.removeEventListener(`wheel`, onWheel, onWheelOptions)
   }, [])
 
   // Axis tick logic
@@ -243,7 +249,10 @@ const Overview: FC = () => {
   }, [rangeY, scaleScreenToView, scaleViewToWorldY, svgPos, viewToScreen, worldToView])
 
   return (
-    <div className="bg-olive-1 dark:bg-olive-3 rounded-lg light:shadow-[0px_0px_20px_0px_var(--olive-5)] p-4 grid grid-cols-[3rem_1fr] grid-rows-[1fr_2rem]">
+    <div
+      className="bg-olive-1 dark:bg-olive-3 rounded-lg light:shadow-[0px_0px_20px_0px_var(--olive-5)] p-4 grid grid-cols-[3rem_1fr] grid-rows-[1fr_2rem]"
+      ref={overviewRef}
+    >
       {/* Y axis */}
       <div className="relative">
         {/* Axis */}

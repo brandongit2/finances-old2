@@ -14,7 +14,7 @@ export function buildTransactions(): Prisma.TransactionCreateWithoutUserInput[] 
 
   let totalBalance = 600_000_00
   let paycheque = 4000_00 // Every two weeks
-  let rent = 3400_00 // Every month
+  let rent = -3400_00 // Every month
 
   const makePurchase = (name: string, amount: number) => {
     transactions.push({
