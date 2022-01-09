@@ -9,6 +9,15 @@ async function seed() {
       email: `user.one@example.com`,
     }),
   )
+
+  // Demo user
+  await createUser(
+    buildUser({
+      firstName: `Demo`,
+      lastName: `User`,
+      email: `demo@finances.brandontsang.net`,
+    }),
+  )
 }
 
 seed()
