@@ -1,12 +1,9 @@
-import * as Popover from "@radix-ui/react-popover"
-import clsx from "clsx"
-import cuid from "cuid"
 import dayjs from "dayjs"
 import {useCallback, useState} from "react"
 import {useLoaderData} from "remix"
 
 import type {Transaction} from "@prisma/client"
-import type {FC, ComponentProps} from "react"
+import type {FC} from "react"
 
 import Button from "~/components/atoms/Button"
 import Heading from "~/components/atoms/Heading"
@@ -107,40 +104,12 @@ const Transactions: FC = () => {
           </div>
         </div>
 
-        <Popover.Root>
-          <Popover.Trigger asChild className="absolute bottom-4 right-4">
-            <Button circle filled>
-              <PlusIcon className="h-4 fill-grass-2" />
-            </Button>
-          </Popover.Trigger>
-          <Popover.Content
-            side="top"
-            sideOffset={8}
-            align="end"
-            className="force-dark bg-olive-1 px-3 py-3 flex flex-col rounded-md"
-          >
-            <Popover.Close>
-              <TransactionTypeButton onClick={() => setNewTransactionFormKey(cuid())}>
-                One-time transaction
-              </TransactionTypeButton>
-            </Popover.Close>
-          </Popover.Content>
-        </Popover.Root>
+        <Button circle filled className="absolute bottom-4 right-4">
+          <PlusIcon className="h-4 fill-grass-2" />
+        </Button>
       </div>
     </ScrollContainer>
   )
 }
 
 export default Transactions
-
-const TransactionTypeButton: FC<ComponentProps<typeof Button>> = ({children, className, ...props}) => {
-  return (
-    <Button
-      unstyled
-      {...props}
-      className={clsx(`px-3 py-2 rounded transition-colors hover:bg-olive-3 select-none`, className)}
-    >
-      {children}
-    </Button>
-  )
-}

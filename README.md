@@ -52,19 +52,13 @@ brew install supabase/tap/supabase
    1. Start a local Postgres database with Supabase:
 
       ```bash
-      yarn run supabase start
+      supabase start
       ```
 
    1. Push the Prisma schema to the database:
 
       ```bash
       yarn run prisma db push
-      ```
-
-   1. Seed the database:
-
-      ```bash
-      yarn run prisma db seed
       ```
 
 1. Start the local dev server:

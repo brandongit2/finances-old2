@@ -10,7 +10,7 @@ const {getSession, commitSession, destroySession} = createSessionStorage({
   cookie: {
     name: `session`,
     httpOnly: process.env.NODE_ENV === `production`,
-    sameSite: process.env.NODE_ENV === `production` ? `lax` : `none`,
+    sameSite: `lax`,
     secrets: [COOKIE_SECRET],
     secure: process.env.NODE_ENV === `production`,
   },

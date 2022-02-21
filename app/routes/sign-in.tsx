@@ -14,6 +14,7 @@ export const action: ActionFunction = async ({request}) => {
   const authorized = await authorize(request, [UserType.UNAUTHENTICATED])
   if (!authorized) return redirect(`/dashboard`)
 
+  console.log(`signing in`)
   switch (request.method) {
     case `POST`: {
       let credentials: TSignIn
@@ -24,13 +25,16 @@ export const action: ActionFunction = async ({request}) => {
         return err.errorObj
       }
 
+      console.log(`validation passed`)
       const user = await db.user.findUnique({where: {email: credentials.email}})
       if (!user || !compare(credentials.password, user.passwordHash))
         return {root: [`Invalid email-password combination.`]}
+      console.log(`credentials valid`)
 
       const session = await getSession(request.headers.get(`Cookie`))
       session.set(`userId`, user.id)
 
+      console.log(`redirecting`)
       return redirect(`/dashboard`, {
         headers: {
           "Set-Cookie": await commitSession(session),

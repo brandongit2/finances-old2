@@ -15,7 +15,7 @@ export const loader: LoaderFunction = async ({request}) => {
   if (!authorized) return redirect(`/`)
 
   const userId = (await getUserId(request))!
-  const transactions = await db.transaction.findMany({where: {userId}, orderBy: {timestamp: `desc`}})
+  const transactions: string[] = []
   return transactions
 }
 
@@ -23,7 +23,7 @@ const DashboardLayout: FC = () => {
   return (
     <div className="h-full grid grid-rows-[auto_1fr]">
       <Header />
-      <div
+      {/* <div
         className="h-full p-6 pt-0 grid grid-rows-[1fr] grid-cols-[30rem_1fr] gap-4"
         style={{gridTemplateAreas: `"transactions overview"`}}
       >
@@ -33,7 +33,7 @@ const DashboardLayout: FC = () => {
         <div className="h-full [grid-area:overview] relative flex flex-col items-stretch children:flex-[1_1_0px]">
           <Overview />
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

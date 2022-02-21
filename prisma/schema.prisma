@@ -18,7 +18,11 @@ model User {
 
   currentBalance Int @default(0)
 
-  transactions Transaction[]
+  categories    Category[]
+  accounts      Account[]
+  locations     Location[]
+  items         Item[]
+  subscriptions Subscription[]
 
   createdAt DateTime @default(now())
 }
@@ -28,12 +32,127 @@ model SessionData {
   data String
 }
 
+model Account {
+  id     String @id @default(cuid())
+  name   String
+  bankId String
+  bank   Bank?  @relation(fields: [bankId], references: [id])
+
+  userId       String
+  user         User          @relation(fields: [userId], references: [id])
+  transactions Transaction[]
+}
+
+model Bank {
+  id   String @id @default(cuid())
+  name String
+
+  accounts Account[]
+}
+
+enum TransactionType {
+  ONE_TIME
+  RECURRING
+}
+
 model Transaction {
-  id            String   @id @default(cuid())
+  id            String          @id @default(cuid())
+  type          TransactionType
+  name          String
+  categoryId    String
+  category      Category        @relation(fields: [categoryId], references: [id])
   balanceBefore Int
   balanceAfter  Int
+  timestamp     DateTime        @default(now())
+  accountId     String
+  account       Account         @relation(fields: [accountId], references: [id])
+  locationId    String
+  location      Location        @relation(fields: [locationId], references: [id])
+  discount      Int
+  discountType  DiscountType
+  taxes         Tax[]
+  notes         String?
+
+  // One-time transaction fields
+  items Item[]
+
+  // Recurring transaction fields
+  subscriptionId String?
+  subscription   Subscription? @relation(fields: [subscriptionId], references: [id])
+}
+
+model Category {
+  id   String @id @default(cuid())
+  name String
+
+  transactions Transaction[]
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Jurisdiction {
+  id   String @id @default(cuid())
+  name String
+
+  taxes Tax[]
+}
+
+model Tax {
+  id      String @id @default(cuid())
+  name    String
+  percent Float
+
+  transactions   Transaction[]
+  jurisdictionId String
+  jurisdiction   Jurisdiction  @relation(fields: [jurisdictionId], references: [id])
+}
+
+model Location {
+  id           String        @id @default(cuid())
+  name         String
+  address      String
+  transactions Transaction[]
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+enum DiscountType {
+  DOLLAR
+  PERCENT
+}
+
+model Item {
+  id           String        @id @default(cuid())
+  name         String
+  discount     Int?
+  discountType DiscountType?
+  notes        String?
+
+  transactions Transaction[]
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+enum FrequencyUnit {
+  DAYS
+  WEEKS
+  MONTHS
+  YEARS
+}
+
+model Subscription {
+  id            String        @id @default(cuid())
   name          String
-  timestamp     DateTime @default(now())
+  cost          Int
+  lastBill      DateTime
+  frequency     Int
+  frequencyUnit FrequencyUnit
+  end           DateTime?
+
+  transactions Transaction[]
 
   userId String
   user   User   @relation(fields: [userId], references: [id])

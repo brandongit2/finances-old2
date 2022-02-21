@@ -52,8 +52,8 @@ const Index: FC = () => {
               Enter demo mode
             </button>
             <p className="text-sm text-olive-11">
-              Demo mode is the same as the full app, only that it uses premade dummy data, and it is read-only. Perfect
-              for if you just want a glimpse at the app!
+              Demo mode is the same as the full app, only that it uses premade dummy data, and changes are not committed
+              to the database. Perfect for if you just want a glimpse at the app!
             </p>
           </Card>
         </div>

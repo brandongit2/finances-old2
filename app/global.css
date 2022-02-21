@@ -30,6 +30,12 @@ body {
   outline: none;
 }
 
+p,
+span {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
 input {
   background: transparent;
 }
