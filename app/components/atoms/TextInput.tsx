@@ -32,9 +32,9 @@ const TextInput: FC<Omit<JSX.IntrinsicElements[`input`], `type` | `value`> & Tex
       onChange={onChange}
       className={clsx(
         `
-          w-full px-2 py-1 my-0.5 focus:bg-grass-a-3 text-olive-12 border border-grass-8 rounded transition-colors
-          autofill:shadow-[0px_0px_0px_100vw_var(--grass-3)_inset] autofill:[-webkit-text-fill-color:var(--olive-12)]
-          autofill:transition-[background-color] autofill:duration-[5000s]
+          my-0.5 w-full rounded border border-grass-8 px-2 py-1 text-olive-12 transition-colors focus:bg-grass-a-3
+          autofill:shadow-[0px_0px_0px_100vw_var(--grass-3)_inset] autofill:transition-[background-color]
+          autofill:duration-[5000s] autofill:[-webkit-text-fill-color:var(--olive-12)]
         `,
         className,
       )}

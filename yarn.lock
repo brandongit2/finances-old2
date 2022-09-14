@@ -7751,6 +7751,7 @@ __metadata:
     netlify-cli: 9.6.5
     prettier: 2.5.1
     prettier-plugin-prisma: 3.9.0
+    prettier-plugin-tailwindcss: 0.1.7
     prisma: 3.9.2
     react: 17.0.2
     react-dom: 17.0.2
@@ -13220,6 +13221,15 @@ __metadata:
   peerDependencies:
     prettier: ">=2"
   checksum: 8355b0dac30191d304729052024e4307a28b7aa8bc517e5dd895a070034303a5d0d5266ec09c2b33f72dee8aaaa936bf5c3b6b67bdf2f5a5d568f5c002112db2
+  languageName: node
+  linkType: hard
+
+"prettier-plugin-tailwindcss@npm:0.1.7":
+  version: 0.1.7
+  resolution: "prettier-plugin-tailwindcss@npm:0.1.7"
+  peerDependencies:
+    prettier: ">=2.2.0"
+  checksum: a692a025a1c73bc95b0c1b2d1763ee47023908f95e83f120517e87f82bc4885a202ef5a0819f8b3c12bf71286b9ab6d4d014342983d84ba878bcef0e20a4e0d8
   languageName: node
   linkType: hard
 
